@@ -5,21 +5,40 @@
  */
 package CineWorldCinemas.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.*;
 
 /**
  *
  * @author joela
  */
-public class Screening {
+@Entity
+@Table(name = "screenings")
+public class Screening implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_movie", nullable = false)
     private Movie movie;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_auditorium", nullable = false)
     private Auditorium auditorium;
+
+    @Column(name = "screeningStart")
+    @Temporal(TemporalType.DATE)
     private Date screeningStart;
+    
+    @OneToMany(mappedBy = "screening")
     private List<SeatReserved> seatsReservedList;
+    
+    @OneToMany(mappedBy = "screening")
     private List<Ticket> ticketsList;
 
     public Screening() {

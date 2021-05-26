@@ -5,17 +5,27 @@
  */
 package CineWorldCinemas.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
 /**
  *
  * @author joela
  */
-public class Client {
+@Entity
+@Table(name = "clients")
+public class Client implements Serializable {
 
+    @Id
+    @Column(name = "id", unique = true, columnDefinition = "varchar(64)")
     private String id;
+
+    @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "client")
     private List<Ticket> ticketsList;
 
     public Client() {

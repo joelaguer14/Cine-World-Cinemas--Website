@@ -5,20 +5,36 @@
  */
 package CineWorldCinemas.logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
 /**
  *
  * @author joela
  */
-public class Movie {
+@Entity
+@Table(name = "movies")
+public class Movie implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "duration")
     private int duration;
+
+    @Column(name = "price")
     private float price;
+
+    @OneToMany(mappedBy = "movie")
     private List<Screening> screeningsList;
 
     public Movie() {
@@ -80,7 +96,7 @@ public class Movie {
     public void setScreeningsList(List<Screening> screeningsList) {
         this.screeningsList = screeningsList;
     }
-    
+
     @Override
     public String toString() {
         return "Movie{" + "id=" + id + ", title=" + title + ", description=" + description + ", duration=" + duration + ", screeningsList=" + screeningsList + '}';

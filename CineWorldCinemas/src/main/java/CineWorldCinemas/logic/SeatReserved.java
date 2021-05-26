@@ -5,15 +5,31 @@
  */
 package CineWorldCinemas.logic;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
 /**
  *
  * @author joela
  */
-public class SeatReserved {
+@Entity
+@Table(name = "seats_reserved")
+public class SeatReserved implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
+    @ManyToOne()
+    @JoinColumn(name = "id_seat", nullable = false)
     private Seat seat;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_ticket", nullable = false)
     private Ticket ticket;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_screening", nullable = false)
     private Screening screening;
 
     public SeatReserved() {

@@ -5,14 +5,25 @@
  */
 package CineWorldCinemas.logic;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
 /**
  *
  * @author joela
  */
-public class User {
+@Entity
+@Table(name = "persons")
+public class User implements Serializable {
 
+    @Id
+    @Column(name = "id", unique = true, columnDefinition = "varchar(64)")
     private String id;
+    
+    @Column(name = "password")
     protected String password;
+    
+    @Column(name = "type")
     private int type;
 
     public User() {

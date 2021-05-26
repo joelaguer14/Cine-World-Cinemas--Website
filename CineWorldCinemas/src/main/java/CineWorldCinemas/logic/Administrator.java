@@ -5,15 +5,24 @@
  */
 package CineWorldCinemas.logic;
 
+import java.io.Serializable;
+import javax.persistence.*;
+
 /**
  *
  * @author joela
  */
-public class Administrator {
-   
+@Entity
+@Table(name = "administrators")
+public class Administrator implements Serializable {
+
+    @Id
+    @Column(name = "id", unique = true, columnDefinition = "varchar(64)")
     private String id;
-    private String name;
     
+    @Column(name = "name")
+    private String name;
+
     public Administrator() {
     }
 
