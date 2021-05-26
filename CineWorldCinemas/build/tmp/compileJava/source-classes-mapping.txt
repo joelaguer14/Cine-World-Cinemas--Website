@@ -1,0 +1,20 @@
+CineWorldCinemas/data/HibernateUtil.java
+ CineWorldCinemas.data.HibernateUtil
+CineWorldCinemas/logic/Client.java
+ CineWorldCinemas.logic.Client
+CineWorldCinemas/logic/Seat.java
+ CineWorldCinemas.logic.Seat
+CineWorldCinemas/logic/Movie.java
+ CineWorldCinemas.logic.Movie
+CineWorldCinemas/logic/Auditorium.java
+ CineWorldCinemas.logic.Auditorium
+CineWorldCinemas/logic/User.java
+ CineWorldCinemas.logic.User
+CineWorldCinemas/logic/Screening.java
+ CineWorldCinemas.logic.Screening
+CineWorldCinemas/logic/SeatReserved.java
+ CineWorldCinemas.logic.SeatReserved
+CineWorldCinemas/logic/Administrator.java
+ CineWorldCinemas.logic.Administrator
+CineWorldCinemas/logic/Ticket.java
+ CineWorldCinemas.logic.Ticket
