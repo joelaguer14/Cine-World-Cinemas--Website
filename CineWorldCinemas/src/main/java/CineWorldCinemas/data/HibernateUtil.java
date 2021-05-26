@@ -40,10 +40,10 @@ public class HibernateUtil {
                 settings.put(Environment.URL, "jdbc:mysql://localhost:3306/cinema?useSSL=false");
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "root");
-                settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+                settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5InnoDBDialect");
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-                settings.put(Environment.HBM2DDL_AUTO, "none");
+                settings.put(Environment.HBM2DDL_AUTO, "create");
 
                 // IMPORTANT HBM2DDL_AUTO +++++++++++++
                 // validate: validate the schema, makes no changes to the database.
