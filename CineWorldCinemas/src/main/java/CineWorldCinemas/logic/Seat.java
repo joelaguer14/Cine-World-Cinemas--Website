@@ -26,7 +26,7 @@ public class Seat implements Serializable {
     private int row;
 
     @Column(name = "seat_num")
-    private int seatNum;
+    private int number;
 
     @ManyToOne()
     @JoinColumn(name = "id_auditorium", nullable = false)
@@ -39,10 +39,10 @@ public class Seat implements Serializable {
         this.seatsReserved = new ArrayList<>();
     }
 
-    public Seat(int id, int row, int seatNum, Auditorium auditorium) {
+    public Seat(int id, int row, int number, Auditorium auditorium) {
         this.id = id;
         this.row = row;
-        this.seatNum = seatNum;
+        this.number = number;
         this.auditorium = auditorium;
         this.seatsReserved = new ArrayList<>();
     }
@@ -64,11 +64,11 @@ public class Seat implements Serializable {
     }
 
     public int getNumber() {
-        return seatNum;
+        return number;
     }
 
-    public void setNumber(int seatNum) {
-        this.seatNum = seatNum;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public Auditorium getAuditorium() {
@@ -89,6 +89,6 @@ public class Seat implements Serializable {
 
     @Override
     public String toString() {
-        return "Seat{" + "id=" + id + ", row=" + row + ", seatNum=" + seatNum + ", auditorium=" + auditorium + ", seatsReserved=" + seatsReserved + '}';
+        return "Seat{" + "id=" + id + ", row=" + row + ", number=" + number + ", auditorium=" + auditorium + ", seatsReserved=" + seatsReserved + '}';
     }
 }
