@@ -25,6 +25,7 @@ body{
     width: 100%;
     z-index: 99;
 }
+
 /*Navbar*/
 .my-navbar{
     background-color: transparent!important;
@@ -80,6 +81,7 @@ body{
     opacity: 0.5;
 }
 
+/*Hr*/
 .featurette-divider {
     margin: 5rem 0;
 }
