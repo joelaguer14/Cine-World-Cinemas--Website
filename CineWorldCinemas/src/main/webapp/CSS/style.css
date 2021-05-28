@@ -9,6 +9,84 @@ and open the template in the editor.
 */
 
 body{
-    background: black;
+    padding-bottom: 3rem;
+    background: white;
+}
+
+.header {
+    position: relative;
+    width: 100%;
+}
+
+.header-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+}
+/*Navbar*/
+.my-navbar{
+    background-color: transparent!important;
+}
+
+.navbar-brand {
+    color: #fff!important;
+}
+
+.navbar-brand:hover {
+    font-weight: bolder;
+    color: #fff!important;
+}
+
+.nav-item .nav-link {
+    display: block;
+    line-height: 36px;
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: 500;
+    color: #fff!important;
+    transition: 0.15s;
+}
+
+.nav-item .nav-link:hover {
+    font-weight: bolder;
+    color: #fff!important;
+}
+
+/*Carousel*/
+.container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: 50px;
+}
+
+.carousel-item {
+    height: 32rem;
+    background: #000;
     color: white;
+    position: relative;
+}
+.overlay-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.5;
+}
+
+.featurette-divider {
+    margin: 5rem 0;
+}
+
+
+/*Footer*/
+.footer {
+    background-color: #1a181d!important;
+    color: #fff;
 }
