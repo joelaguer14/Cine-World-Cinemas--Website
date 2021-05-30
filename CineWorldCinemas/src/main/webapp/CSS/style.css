@@ -13,6 +13,7 @@ body{
     background: white;
 }
 
+/*Navbar*/
 .header {
     position: relative;
     width: 100%;
@@ -26,7 +27,6 @@ body{
     z-index: 99;
 }
 
-/*Navbar*/
 .my-navbar{
     background-color: transparent!important;
 }

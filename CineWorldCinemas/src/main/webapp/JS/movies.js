@@ -6,22 +6,22 @@
 
 var movies = [{
         title: "Spiderman",
-        imagesrc: "/CineWorldCinemas/IMAGES/logo.png",
+        imagesrc: "/CineWorldCinemas/IMAGES/banner-JOKER.jpg",
         description: "Spiderman!!"
     },
     {
         title: "Batman",
-        imagesrc: "/CineWorldCinemas/IMAGES/logo.png",
+        imagesrc: "/CineWorldCinemas/IMAGES/banner-JOKER.jpg",
         description: "Batman!!"
     },
     {
         title: "Superman",
-        imagesrc: "/CineWorldCinemas/IMAGES/logo.png",
+        imagesrc: "/CineWorldCinemas/IMAGES/banner-JOKER.jpg",
         description: "Superman!!"
     },
     {
         title: "Thor",
-        imagesrc: "/CineWorldCinemas/IMAGES/logo.png",
+        imagesrc: "/CineWorldCinemas/IMAGES/banner-JOKER.jpg",
         description: "Thor!!"
     }
 ];
