@@ -9,8 +9,8 @@ and open the template in the editor.
 */
 
 body{
+    height: 100vh;
     padding-top: 4rem;
-    padding-bottom: 3rem;
     background: white;
 }
 
@@ -80,6 +80,7 @@ body{
     color: white;
     position: relative;
 }
+
 .overlay-image {
     position: absolute;
     bottom: 0;
@@ -89,20 +90,28 @@ body{
     background-position: center;
     background-size: cover;
     opacity: 0.5;
+    display: block
+}
+
+/*Grid*/
+.title-grid {
+    font-family: 'Raleway', sans-serif;
 }
 
 .image-grid {
-    height: 190px;
-    width: 370px;
+    height: 225px;
+    width: 100%;
     display: inline-block;
 }
 
+.my-card{
+    height: 100%; 
+}
 
 /*Hr*/
 .featurette-divider {
     margin: 5rem 0;
 }
-
 
 /*Footer*/
 .footer {

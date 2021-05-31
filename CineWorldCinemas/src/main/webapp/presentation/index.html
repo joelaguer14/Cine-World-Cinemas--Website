@@ -7,8 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <title>Home | Cine World Cinemas</title>
-        <meta charset="windows-1252">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
@@ -22,26 +21,30 @@ and open the template in the editor.
     </head>
     <body>
         <div data-include="Header"></div>
-        <main>
-            <div id="myCarousel" class="carousel slide carouse-fade" data-bs-ride="carousel">
-                <div class="carousel-indicators" id="indicators"></div>
-                <div class="carousel-inner" id="carousel-content">
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+
+        <div id="myCarousel" class="carousel slide carouse-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators" id="indicators"></div>
+            <div class="carousel-inner" id="carousel-content">
             </div>
-            <div class="container marketing text-center">
-                <div class="row" id="row-content">
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        
+        <h1 class="display-3 text-center pb-5 title-grid">NOW BOOKING</h1>
+        
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="row-content">
                 </div>
-                <hr class="featurette-divider">
             </div>
-            <div data-include="Footer"> </div>
-        </main>
+        </div>
+
+        <div data-include="Footer"> </div>
     </body>
 </html>

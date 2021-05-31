@@ -4,25 +4,21 @@
  * and open the template in the editor.
  */
 
-var movies = [{
+var movies = [
+    {
         title: "Spiderman",
-        imagesrc: "/CineWorldCinemas/IMAGES/banner-JOKER.jpg",
-        description: "Spiderman!!"
+        imagesrc: "https://pauladeveraescritora.files.wordpress.com/2019/10/spider-man-far-from-home-banner.jpg",
+        description: "Parker is recruited by Nick Fury and Mysterio to face the Elementals while he is on a school trip to Europe."
     },
     {
         title: "Batman",
-        imagesrc: "/CineWorldCinemas/IMAGES/banner-JOKER.jpg",
-        description: "Batman!!"
+        imagesrc: "http://splashreport.com/wp-content/uploads/2017/01/legobatman-header.png",
+        description: "In the Lego Universe, Batman continues to protect Gotham City and fight crime. During his latest mission to stop Joker from destroying the city, he hurts his arch-rival's feelings by telling him he is not as important in his life as he thinks he is, leading Joker to seek the ultimate revenge on him.In the Lego Universe, Batman continues to protect Gotham City and fight crime. During his latest mission to stop Joker from destroying the city, he hurts his arch-rival's feelings by telling him he is not as important in his life as he thinks he is, leading Joker to seek the ultimate revenge on him"
     },
     {
         title: "Superman",
-        imagesrc: "/CineWorldCinemas/IMAGES/banner-JOKER.jpg",
-        description: "Superman!!"
-    },
-    {
-        title: "Thor",
-        imagesrc: "/CineWorldCinemas/IMAGES/banner-JOKER.jpg",
-        description: "Thor!!"
+        imagesrc: "https://collider.com/wp-content/uploads/man-of-steel-poster-banner.jpg",
+        description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter-cultural revolution against the wealthy in a decaying Gotham City."
     }
 ];
 
@@ -48,11 +44,9 @@ function carouselContentDisplay(carouselContent, movie) {
     var indicator = $("#indicators");
     carouselContent.append(
             "<div class='carousel-item active' id='" + movie.title + "'>" +
-            "<div class='overlay-image' style='background-image:url(/CineWorldCinemas/IMAGES/banner-JOKER.jpg);'> </div>" +
+            "<div class='overlay-image' style='background-image:url(" + movie.imagesrc + "); background-position: center center;'> </div>" +
             "<div class='container'>" +
             "<div class='carousel-caption text-start'>" +
-            "<h1>" + movie.title + "</h1>" +
-            "<p>" + movie.description + "</p>" +
             "</div>" +
             "</div>" +
             "</div>"
@@ -68,11 +62,19 @@ function carouselContentDisplay(carouselContent, movie) {
 
 function rowContentDisplay(rowContent, movie) {
     rowContent.append(
-            "<div class='col-lg-4 py-3'>" +
-            "<img src='/CineWorldCinemas/IMAGES/banner-JOKER.jpg' class='image-grid' alt=''>" +
-            "<h2>" + movie.title + "</h2>" +
-            "<p>" + movie.description + "</p>" +
-            "<p><a class='btn btn-secondary' href='#'>View details &raquo;</a></p>" +
+            "<div class='col'>" +
+            "<div class='card shadow-sm my-card'>" +
+            "<img class='image-grid d-block w-100' src='" + movie.imagesrc + "' alt=''>" +
+            "<div class='card-body'>" +
+            "<div class='d-flex justify-content-between align-items-center'>" +
+            "<div class='btn-group'>" +
+            "<button type='button' class='btn btn-sm btn-outline-secondary'>View</button>" +
+            "<button type='button' class='btn btn-sm btn-outline-secondary'>Edit</button>" +
+            "</div>" +
+            "<small class='text-muted'>9 mins</small>" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
             "</div>"
             );
 }
