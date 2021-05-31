@@ -9,6 +9,7 @@ and open the template in the editor.
 */
 
 body{
+    padding-top: 4rem;
     padding-bottom: 3rem;
     background: white;
 }
@@ -28,22 +29,20 @@ body{
 }
 
 .my-navbar{
-    background-color: transparent!important;
+    background-color: #212529!important;
 }
 
 .navbar-brand {
     color: #fff!important;
-}
-
-.navbar-brand:hover {
-    font-weight: bolder;
-    color: #fff!important;
+    font-family: 'Raleway', sans-serif;
+    font-size: 170%;
 }
 
 .nav-item .nav-link {
     display: block;
     line-height: 36px;
     text-transform: capitalize;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     font-weight: 500;
     color: #fff!important;
@@ -57,11 +56,22 @@ body{
 
 /*Carousel*/
 .container {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding-bottom: 50px;
+    width: 100%;
+    padding-right: var(--bs-gutter-x,.75rem);
+    padding-left: var(--bs-gutter-x,.75rem);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.carousel{
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.carousel-inner{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 
 .carousel-item {
@@ -80,6 +90,13 @@ body{
     background-size: cover;
     opacity: 0.5;
 }
+
+.image-grid {
+    height: 190px;
+    width: 370px;
+    display: inline-block;
+}
+
 
 /*Hr*/
 .featurette-divider {

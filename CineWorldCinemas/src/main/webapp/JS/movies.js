@@ -35,17 +35,18 @@ function loaded() {
 $(loaded);
 
 function listMovies(movies) {
-    var listado = $("#carousel-content");
-    listado.html("");
+    var carouselContent = $("#carousel-content");
+    var rowContent = $("#row-content");
+    carouselContent.html("");
     movies.forEach((movie) => {
-        row(listado, movie);
+        carouselContentDisplay(carouselContent, movie);
+        rowContentDisplay(rowContent, movie);
     });
 }
 
-function row(listado, movie) {
-    
+function carouselContentDisplay(carouselContent, movie) {
     var indicator = $("#indicators");
-    listado.append(
+    carouselContent.append(
             "<div class='carousel-item active' id='" + movie.title + "'>" +
             "<div class='overlay-image' style='background-image:url(/CineWorldCinemas/IMAGES/banner-JOKER.jpg);'> </div>" +
             "<div class='container'>" +
@@ -63,4 +64,15 @@ function row(listado, movie) {
         $("#" + movie.title).removeClass("active");
     }
     cont++;
+}
+
+function rowContentDisplay(rowContent, movie) {
+    rowContent.append(
+            "<div class='col-lg-4 py-3'>" +
+            "<img src='/CineWorldCinemas/IMAGES/banner-JOKER.jpg' class='image-grid' alt=''>" +
+            "<h2>" + movie.title + "</h2>" +
+            "<p>" + movie.description + "</p>" +
+            "<p><a class='btn btn-secondary' href='#'>View details &raquo;</a></p>" +
+            "</div>"
+            );
 }
