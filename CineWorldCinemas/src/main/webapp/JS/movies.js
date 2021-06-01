@@ -44,7 +44,7 @@ function carouselContentDisplay(carouselContent, movie) {
     var indicator = $("#indicators");
     carouselContent.append(
             "<div class='carousel-item active' id='" + movie.title + "'>" +
-            "<div class='overlay-image' style='background-image:url(" + movie.imagesrc + "); background-position: center center;'> </div>" +
+            "<div class='overlay-image' style='background-image:url(" + movie.imagesrc + ");'> </div>" +
             "<div class='container'>" +
             "<div class='carousel-caption text-start'>" +
             "</div>" +

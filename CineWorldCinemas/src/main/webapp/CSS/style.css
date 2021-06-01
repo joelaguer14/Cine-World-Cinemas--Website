@@ -75,7 +75,7 @@ body{
 }
 
 .carousel-item {
-    height: 32rem;
+    height: 50rem;
     background: #000;
     color: white;
     position: relative;
@@ -90,7 +90,6 @@ body{
     background-position: center;
     background-size: cover;
     opacity: 0.5;
-    display: block
 }
 
 /*Grid*/
