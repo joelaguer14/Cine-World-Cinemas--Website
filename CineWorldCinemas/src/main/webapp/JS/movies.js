@@ -78,3 +78,4 @@ function rowContentDisplay(rowContent, movie) {
             "</div>"
             );
 }
+

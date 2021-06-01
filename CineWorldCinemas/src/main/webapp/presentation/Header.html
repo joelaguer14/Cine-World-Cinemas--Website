@@ -25,7 +25,7 @@ and open the template in the editor.
                                 <a class="nav-link" href="#">Sign Up </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Log In</a>
+                                <a class="nav-link li-modal" href="/CineWorldCinemas/presentation/login/View.html">Log In</a>                 
                             </li>
                         </ul>
                         <form class="d-flex">
@@ -37,4 +37,11 @@ and open the template in the editor.
             </nav>
         </div>
     </div>
+    <script>
+        $('.li-modal').on('click', function (e) {
+            e.preventDefault();
+            $('#theModal').modal('show').find('.modal-content').load($(this).attr('href'));
+        });
+
+    </script>
 </header>
