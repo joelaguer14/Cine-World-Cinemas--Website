@@ -37,11 +37,9 @@ and open the template in the editor.
             </nav>
         </div>
     </div>
-    <script>
-        $('.li-modal').on('click', function (e) {
-            e.preventDefault();
-            $('#theModal').modal('show').find('.modal-content').load($(this).attr('href'));
-        });
-
-    </script>
 </header>
+
+<script>
+var url = "/CineWorldCinemas/JS/login.js";
+$.getScript(url);
+</script>
