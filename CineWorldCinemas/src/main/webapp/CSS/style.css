@@ -173,3 +173,14 @@ body{
     background-color: #1a181d!important;
     color: #fff;
 }
+/*screenings*/
+.screenings{
+    display:none;
+}
+/*movie-image hover*/
+.movie-image:hover + .screenings{
+    display:inline-block;
+}
+.screenings:hover{
+    display:inline-block;
+}
