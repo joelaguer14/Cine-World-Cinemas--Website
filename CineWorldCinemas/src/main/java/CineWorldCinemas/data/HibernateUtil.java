@@ -50,8 +50,7 @@ public class HibernateUtil {
                 // update: update the schema.
                 // create: creates the schema, destroying previous data.
                 // create-drop: drop the schema when the SessionFactory is closed explicitly, typically when the application is stopped.
-                // none: does nothing with the schema, makes no changes to the database
-                configuration.addAnnotatedClass(Administrator.class);
+                // none: does nothing with the schema, makes no changes to the database                
                 configuration.addAnnotatedClass(Auditorium.class);
                 configuration.addAnnotatedClass(Movie.class);
                 configuration.addAnnotatedClass(Screening.class);

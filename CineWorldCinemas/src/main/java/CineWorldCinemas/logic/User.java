@@ -25,8 +25,8 @@ public class User implements Serializable {
     @Column(name = "password")
     protected String password;
     
-    @Column(name = "type")
-    private int type;
+    @Column(name = "administrator")
+    private boolean admin;
 
     @Column(name = "name")
     private String name;
@@ -38,13 +38,15 @@ public class User implements Serializable {
         this.ticketsList = new ArrayList<>();
     }
 
-    public User(String id, String password, int type, String name) {
+    public User(String id, String password, boolean admin, String name) {
         this.id = id;
         this.password = password;
-        this.type = type;
+        this.admin = admin;
         this.name = name;
         this.ticketsList = new ArrayList<>();
     }
+
+    
 
     public String getId() {
         return id;
@@ -61,15 +63,9 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
+    
+    
+    
     public String getName() {
         return name;
     }
@@ -85,9 +81,11 @@ public class User implements Serializable {
     public void setTicketsList(List<Ticket> ticketsList) {
         this.ticketsList = ticketsList;
     }
-
+    
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", password=" + password + ", type=" + type + ", name=" + name + ", ticketsList=" + ticketsList + '}';
+        return "User{" + "id=" + id + ", password=" + password + ", admin=" + admin + ", name=" + name + ", ticketsList=" + ticketsList + '}';
     }
+
+    
 }

@@ -5,7 +5,7 @@
  */
 package CineWorldCinemas.logic;
 
-import CineWorldCinemas.data.AdministratorDAO;
+
 import CineWorldCinemas.data.AuditoriumDAO;
 import CineWorldCinemas.data.MovieDAO;
 import CineWorldCinemas.data.ScreeningDAO;
@@ -30,7 +30,7 @@ public class Service {
         return uniqueInstance;
     }
 
-    private AdministratorDAO administratorDAO;
+
     private AuditoriumDAO auditoriumDAO;
     private MovieDAO movieDAO;
     private ScreeningDAO screeningDAO;
@@ -40,7 +40,7 @@ public class Service {
     private UserDAO userDAO;
 
     public Service() {
-        this.administratorDAO = new AdministratorDAO();
+
         this.auditoriumDAO = new AuditoriumDAO();
         this.movieDAO = new MovieDAO();
         this.screeningDAO = new ScreeningDAO();
@@ -49,32 +49,6 @@ public class Service {
         this.ticketDAO = new TicketDAO();
         this.userDAO = new UserDAO();
     }
-
-    // <editor-fold defaultstate="collapsed" desc="Administrator C-R-U-D methods. Click on the + sign on the left to edit the code.">
-    public Administrator findAdministratorById(String id) throws Exception {
-        return administratorDAO.findById(id);
-    }
-
-    public List<Administrator> findAllAdministrators() throws Exception {
-        return administratorDAO.findAll();
-    }
-
-    public Administrator saveAdministrator(Administrator admin) throws Exception {
-        return administratorDAO.save(admin);
-    }
-
-    public Administrator updateAdministrator(Administrator admin) throws Exception {
-        return administratorDAO.update(admin);
-    }
-
-    public void deleteAdministratorById(String id) throws Exception {
-        administratorDAO.deleteById(id);
-    }
-
-    public void deleteAdministrator(Administrator admin) throws Exception {
-        administratorDAO.delete(admin);
-    }
-    // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="Auditorium C-R-U-D methods. Click on the + sign on the left to edit the code.">
     public Auditorium findAuditoriumById(int id) {
