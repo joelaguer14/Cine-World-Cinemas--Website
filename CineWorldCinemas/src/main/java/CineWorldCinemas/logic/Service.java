@@ -7,7 +7,6 @@ package CineWorldCinemas.logic;
 
 import CineWorldCinemas.data.AdministratorDAO;
 import CineWorldCinemas.data.AuditoriumDAO;
-import CineWorldCinemas.data.ClientDAO;
 import CineWorldCinemas.data.MovieDAO;
 import CineWorldCinemas.data.ScreeningDAO;
 import CineWorldCinemas.data.SeatDAO;
@@ -33,7 +32,6 @@ public class Service {
 
     private AdministratorDAO administratorDAO;
     private AuditoriumDAO auditoriumDAO;
-    private ClientDAO clientDAO;
     private MovieDAO movieDAO;
     private ScreeningDAO screeningDAO;
     private SeatDAO seatDAO;
@@ -44,7 +42,6 @@ public class Service {
     public Service() {
         this.administratorDAO = new AdministratorDAO();
         this.auditoriumDAO = new AuditoriumDAO();
-        this.clientDAO = new ClientDAO();
         this.movieDAO = new MovieDAO();
         this.screeningDAO = new ScreeningDAO();
         this.seatDAO = new SeatDAO();
@@ -102,32 +99,6 @@ public class Service {
 
     public void deleteAuditorium(Auditorium auditorium) throws Exception {
         auditoriumDAO.delete(auditorium);
-    }
-    // </editor-fold>
-
-    // <editor-fold defaultstate="collapsed" desc="Client C-R-U-D methods. Click on the + sign on the left to edit the code.">
-    public Client findClientById(String id) {
-        return clientDAO.findById(id);
-    }
-
-    public List<Client> findAllClients() {
-        return clientDAO.findAll();
-    }
-
-    public Client saveClient(Client client) {
-        return clientDAO.save(client);
-    }
-
-    public Client updateClient(Client client) {
-        return clientDAO.update(client);
-    }
-
-    public void deleteClientById(String id) throws Exception {
-        clientDAO.deleteById(id);
-    }
-
-    public void deleteClient(Client client) throws Exception {
-        clientDAO.delete(client);
     }
     // </editor-fold>
     

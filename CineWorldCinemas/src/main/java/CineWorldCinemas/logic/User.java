@@ -6,6 +6,8 @@
 package CineWorldCinemas.logic;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.*;
 
 /**
@@ -26,13 +28,22 @@ public class User implements Serializable {
     @Column(name = "type")
     private int type;
 
+    @Column(name = "name")
+    private String name;
+
+    @OneToMany(mappedBy = "user")
+    private List<Ticket> ticketsList;
+    
     public User() {
+        this.ticketsList = new ArrayList<>();
     }
 
-    public User(String id, String password, int type) {
+    public User(String id, String password, int type, String name) {
         this.id = id;
         this.password = password;
         this.type = type;
+        this.name = name;
+        this.ticketsList = new ArrayList<>();
     }
 
     public String getId() {
@@ -59,8 +70,24 @@ public class User implements Serializable {
         this.type = type;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Ticket> getTicketsList() {
+        return ticketsList;
+    }
+
+    public void setTicketsList(List<Ticket> ticketsList) {
+        this.ticketsList = ticketsList;
+    }
+
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", type=" + type + '}';
+        return "User{" + "id=" + id + ", password=" + password + ", type=" + type + ", name=" + name + ", ticketsList=" + ticketsList + '}';
     }
 }

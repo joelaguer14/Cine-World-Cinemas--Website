@@ -53,7 +53,6 @@ public class HibernateUtil {
                 // none: does nothing with the schema, makes no changes to the database
                 configuration.addAnnotatedClass(Administrator.class);
                 configuration.addAnnotatedClass(Auditorium.class);
-                configuration.addAnnotatedClass(Client.class);
                 configuration.addAnnotatedClass(Movie.class);
                 configuration.addAnnotatedClass(Screening.class);
                 configuration.addAnnotatedClass(Seat.class);

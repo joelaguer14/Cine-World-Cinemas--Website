@@ -27,8 +27,8 @@ public class Ticket implements Serializable {
     private Screening screening;
     
     @ManyToOne()
-    @JoinColumn(name = "id_client", nullable = true)
-    private Client client;
+    @JoinColumn(name = "id_user", nullable = true)
+    private User user;
     
     @Column(name = "total_price")
     private float totalPrice;
@@ -40,10 +40,10 @@ public class Ticket implements Serializable {
         this.seatsReservedList = new ArrayList<>();
     }
 
-    public Ticket(int id, Screening screening, Client client, float totalPrice) {
+    public Ticket(int id, Screening screening, User user, float totalPrice) {
         this.id = id;
         this.screening = screening;
-        this.client = client;
+        this.user = user;
         this.totalPrice = totalPrice;
         this.seatsReservedList = new ArrayList<>();
     }
@@ -64,14 +64,14 @@ public class Ticket implements Serializable {
         this.screening = screening;
     }
 
-    public Client getClient() {
-        return client;
+    public User getUser() {
+        return user;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setUser(User user) {
+        this.user = user;
     }
-
+    
     public float getTotalPrice() {
         return totalPrice;
     }
@@ -90,6 +90,6 @@ public class Ticket implements Serializable {
 
     @Override
     public String toString() {
-        return "Ticket{" + "id=" + id + ", screening=" + screening + ", client=" + client + ", totalPrice=" + totalPrice + ", seatsReservedList=" + seatsReservedList + '}';
+        return "Ticket{" + "id=" + id + ", screening=" + screening + ", user=" + user + ", totalPrice=" + totalPrice + ", seatsReservedList=" + seatsReservedList + '}';
     }
 }

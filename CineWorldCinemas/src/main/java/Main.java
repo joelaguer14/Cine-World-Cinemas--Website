@@ -16,9 +16,9 @@ public class Main {
       public static void main(String[] args) {
          Service service = Service.instance();
          
-         User user1 = new User("111","111",1);
+         //User user1 = new User("111","111",1);
          
-         service.saveUser(user1);
+         //service.saveUser(user1);
          
     }
     
