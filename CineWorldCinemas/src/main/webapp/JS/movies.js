@@ -27,6 +27,27 @@ var movies = [
         description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter" +
                 "-cultural revolution against the wealthy in a decaying Gotham City.",
         screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"]
+    },
+    {
+        title: "a",
+        imagesrc: "https://collider.com/wp-content/uploads/man-of-steel-poster-banner.jpg",
+        description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter" +
+                "-cultural revolution against the wealthy in a decaying Gotham City.",
+        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"]
+    },
+    {
+        title: "b",
+        imagesrc: "https://collider.com/wp-content/uploads/man-of-steel-poster-banner.jpg",
+        description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter" +
+                "-cultural revolution against the wealthy in a decaying Gotham City.",
+        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"]
+    },
+    {
+        title: "c",
+        imagesrc: "https://collider.com/wp-content/uploads/man-of-steel-poster-banner.jpg",
+        description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter" +
+                "-cultural revolution against the wealthy in a decaying Gotham City.",
+        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"]
     }
 ];
 
@@ -69,18 +90,16 @@ function carouselContentDisplay(carouselContent, movie) {
 }
 
 function rowContentDisplay(rowContent, movie) {
+    let screeningsTxt="";
+    movie.screenings.forEach((s)=>screeningsTxt+="<a href=# class='screening-link'>"+s+"</a>");
     rowContent.append(
             "<div class='col'>" +
             "<div class='card shadow-sm my-card'>" +
-            "<img class='image-grid d-block w-100 movie-image' src='" + movie.imagesrc + "' alt=''>" +
-            "<div class='screenings'> <p>" + movie.screenings + "</p></div>" +
+            "<img class='image-grid d-block w-100 ' src='" + movie.imagesrc + "' alt=''>" +
             "<div class='card-body'>" +
+            "<div class='screenings text-center'>" + screeningsTxt + "</div>" +
             "<div class='d-flex justify-content-between align-items-center'>" +
-            "<div class='btn-group'>" +
-            "<button type='button' class='btn btn-sm btn-outline-secondary'>View</button>" +
-            "<button type='button' class='btn btn-sm btn-outline-secondary'>Edit</button>" +
-            "</div>" +
-            "<small class='text-muted'>9 mins</small>" +
+            "<small class='text-muted px-2'>Duration: 9 mins</small>" +
             "</div>" +
             "</div>" +
             "</div>" +

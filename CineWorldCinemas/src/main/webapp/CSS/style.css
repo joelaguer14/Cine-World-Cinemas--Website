@@ -100,7 +100,7 @@ body{
 .image-grid {
     height: 225px;
     width: 100%;
-    display: inline-block;
+    display: block;
 }
 
 .my-card{
@@ -176,11 +176,24 @@ body{
 /*screenings*/
 .screenings{
     display:none;
+    position: absolute;
+    
 }
 /*movie-image hover*/
-.movie-image:hover + .screenings{
-    display:inline-block;
+.card:hover .screenings, .screenings:hover{
+    display:block;
+    background-color: #f8f9fa;
+    z-index: 1;
+    width: 100%;
+    left: 0;
+    max-height: 150px;
+    overflow:scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    border-bottom:1px solid #D4D4D4;
+    border-left:1px solid #D4D4D4;
+    border-right:1px solid #D4D4D4;
 }
-.screenings:hover{
-    display:inline-block;
+.screening-link{
+    display:block;
 }
