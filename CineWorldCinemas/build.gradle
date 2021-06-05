@@ -13,5 +13,7 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.30.Final'
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.49'
+    implementation group: 'org.glassfish.jersey.media', name: 'jersey-media-multipart', version: '3.0.1'
+
     testImplementation     'junit:junit:4.13'    
 }
