@@ -1,4 +1,5 @@
 
+import CineWorldCinemas.logic.Movie;
 import CineWorldCinemas.logic.Service;
 import CineWorldCinemas.logic.User;
 
@@ -15,10 +16,14 @@ import CineWorldCinemas.logic.User;
 public class Main {
       public static void main(String[] args) {
          Service service = Service.instance();
+         service.saveMovie(new Movie("Anabelle", "Terror", 120,5.0f));
+         service.saveMovie(new Movie("Anabelle2", "Terror", 120,6.0f));
+         service.saveMovie(new Movie("Conjuring", "Terror", 120,6.5f));
          
-         //User user1 = new User("111","111",1);
+         System.out.println(service.findMoviesByName("Ana"));
          
-         //service.saveUser(user1);
+         
+         
          
     }
     

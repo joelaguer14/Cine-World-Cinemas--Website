@@ -6,8 +6,10 @@
 package CineWorldCinemas.data;
 
 import CineWorldCinemas.logic.Movie;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 /**
  *
@@ -57,4 +59,22 @@ public class MovieDAO {
         session.getTransaction().commit();
         session.refresh(movie);
     }
+//    /**
+//     * Method to find the entity list by name
+//     *
+//     * @param title the title of the entity list to find
+//     * @return the corresponding Movie
+//     */
+//    
+//    public List<Movie> findByName(String title) {
+//        List<Movie> movies;
+//        Query query = session.createQuery("from Movie m where m.title like '%title%'");
+//        query.setParameter("title", title);
+//
+//        
+//            movies = query.getResultList();
+//        
+//
+//        return movies;
+//    }
 }

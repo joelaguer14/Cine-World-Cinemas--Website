@@ -41,12 +41,12 @@ public class Movie implements Serializable {
         this.screeningsList = new ArrayList<>();
     }
 
-    public Movie(int id, String title, String description, int duration, float price) {
-        this.id = id;
+    public Movie(String title, String description, int duration, float price) {
         this.title = title;
         this.description = description;
         this.duration = duration;
         this.price = price;
+        this.screeningsList = new ArrayList<>();
     }
 
     public int getId() {

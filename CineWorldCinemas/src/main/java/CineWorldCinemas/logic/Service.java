@@ -13,6 +13,7 @@ import CineWorldCinemas.data.SeatDAO;
 import CineWorldCinemas.data.SeatReservedDAO;
 import CineWorldCinemas.data.TicketDAO;
 import CineWorldCinemas.data.UserDAO;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -79,6 +80,13 @@ public class Service {
     // <editor-fold defaultstate="collapsed" desc="Movie C-R-U-D methods. Click on the + sign on the left to edit the code.">
     public Movie findMovieById(int id) {
         return movieDAO.findById(id);
+    }
+    public List<Movie> findMoviesByName(String name){
+        List<Movie> movies=new ArrayList<>();
+        this.findAllMovies().stream().filter(movie -> (movie.getTitle().
+                contains(name))).forEachOrdered(movie -> { movies.add(movie);
+        });
+        return movies;
     }
 
     public List<Movie> findAllMovies() {
