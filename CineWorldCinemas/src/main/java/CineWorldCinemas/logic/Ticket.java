@@ -40,8 +40,7 @@ public class Ticket implements Serializable {
         this.seatsReservedList = new ArrayList<>();
     }
 
-    public Ticket(int id, Screening screening, User user, float totalPrice) {
-        this.id = id;
+    public Ticket(Screening screening, User user, float totalPrice) {
         this.screening = screening;
         this.user = user;
         this.totalPrice = totalPrice;

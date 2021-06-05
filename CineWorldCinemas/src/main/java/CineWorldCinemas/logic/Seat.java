@@ -39,8 +39,7 @@ public class Seat implements Serializable {
         this.seatsReserved = new ArrayList<>();
     }
 
-    public Seat(int id, int row, int number, Auditorium auditorium) {
-        this.id = id;
+    public Seat(int row, int number, Auditorium auditorium) {
         this.row = row;
         this.number = number;
         this.auditorium = auditorium;
