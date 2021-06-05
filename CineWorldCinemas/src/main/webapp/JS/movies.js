@@ -9,7 +9,8 @@ var movies = [
         title: "Spiderman",
         imagesrc: "https://pauladeveraescritora.files.wordpress.com/2019/10/spider-man-far-from-home-banner.jpg",
         description: "Parker is recruited by Nick Fury and Mysterio to face the Elementals while he is on a school trip to Europe.",
-        screenings: ["Jun 28, 3pm/ A2", "Jun 28, 6pm/ B2", "Jun 29, 3pm/ A2","Jun 28, 3pm/ A2", "Jun 28, 6pm/ B2", "Jun 29, 3pm/ A2","Jun 28, 3pm/ A2", "Jun 28, 6pm/ B2", "Jun 29, 3pm/ A2"]
+        screenings: ["Jun 28, 3pm/ A2", "Jun 28, 6pm/ B2", "Jun 29, 3pm/ A2", "Jun 28, 3pm/ A2", "Jun 28, 6pm/ B2", "Jun 29, 3pm/ A2", "Jun 28, 3pm/ A2", "Jun 28, 6pm/ B2", "Jun 29, 3pm/ A2"],
+        duration: 90
     },
     {
         title: "Batman",
@@ -19,35 +20,40 @@ var movies = [
                 "is, leading Joker to seek the ultimate revenge on him.In the Lego Universe, Batman continues to protect Gotham City and fight crime." +
                 " During his latest mission to stop Joker from destroying the city, he hurts his arch-rival's feelings by telling him he is not as important" +
                 " in his life as he thinks he is, leading Joker to seek the ultimate revenge on him",
-        screenings: ["Jun 28, 5pm/ B3", "Jun 29, 6pm/ A3", "Jun 30, 2pm/ C2"]
+        screenings: ["Jun 28, 5pm/ B3", "Jun 29, 6pm/ A3", "Jun 30, 2pm/ C2"],
+        duration: 90
     },
     {
         title: "Superman",
         imagesrc: "https://collider.com/wp-content/uploads/man-of-steel-poster-banner.jpg",
         description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter" +
                 "-cultural revolution against the wealthy in a decaying Gotham City.",
-        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"]
+        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"],
+        duration: 90
     },
     {
         title: "a",
         imagesrc: "https://collider.com/wp-content/uploads/man-of-steel-poster-banner.jpg",
         description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter" +
                 "-cultural revolution against the wealthy in a decaying Gotham City.",
-        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"]
+        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"],
+        duration: 90
     },
     {
         title: "b",
         imagesrc: "https://collider.com/wp-content/uploads/man-of-steel-poster-banner.jpg",
         description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter" +
                 "-cultural revolution against the wealthy in a decaying Gotham City.",
-        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"]
+        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"],
+        duration: 90
     },
     {
         title: "c",
         imagesrc: "https://collider.com/wp-content/uploads/man-of-steel-poster-banner.jpg",
         description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter" +
                 "-cultural revolution against the wealthy in a decaying Gotham City.",
-        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"]
+        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"],
+        duration: 90
     }
 ];
 
@@ -90,20 +96,20 @@ function carouselContentDisplay(carouselContent, movie) {
 }
 
 function rowContentDisplay(rowContent, movie) {
-    let screeningsTxt="";
-    movie.screenings.forEach((s)=>screeningsTxt+="<a href=# class='screening-link'>"+s+"</a>");
+    let screeningsTxt = "";
+    movie.screenings.forEach((s) => screeningsTxt += "<a href=# class='screening-link'>" + s + "</a>");
+
     rowContent.append(
             "<div class='col'>" +
-            "<div class='card shadow-sm my-card'>" +
+            "<div class='card my-card'>" +
             "<img class='image-grid d-block w-100 ' src='" + movie.imagesrc + "' alt=''>" +
             "<div class='card-body'>" +
             "<div class='screenings text-center'>" + screeningsTxt + "</div>" +
             "<div class='d-flex justify-content-between align-items-center'>" +
-            "<small class='text-muted px-2'>Duration: 9 mins</small>" +
+            "<small class='card-body-text text-muted px-2'>Duration: " + movie.duration + " minutes</small>" +
             "</div>" +
             "</div>" +
             "</div>" +
             "</div>"
             );
 }
-

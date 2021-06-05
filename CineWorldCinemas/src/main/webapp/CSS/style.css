@@ -104,7 +104,43 @@ body{
 }
 
 .my-card{
-    height: 100%; 
+    height: 100%;
+    padding-bottom: 2rem;
+}
+
+.card-body-text {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.screenings{
+    display:none;
+    position: absolute;
+}
+
+.card:hover .screenings, .screenings:hover{
+    display:block;
+    background-color: #f8f9fa;
+    z-index: 1;
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+    max-height: 4.3rem;
+    overflow:scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #E3E3E3;
+}
+
+.screening-link{
+    display:block;
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+    color: #212529;
+}
+
+.screening-link:hover {
+    font-weight: bold;
+    color: #212529;
 }
 
 /*Forms*/
@@ -173,27 +209,18 @@ body{
     background-color: #1a181d!important;
     color: #fff;
 }
-/*screenings*/
-.screenings{
-    display:none;
-    position: absolute;
-    
+
+.footer-text {
+    font-family: 'Open Sans', sans-serif;
 }
-/*movie-image hover*/
-.card:hover .screenings, .screenings:hover{
-    display:block;
-    background-color: #f8f9fa;
-    z-index: 1;
-    width: 100%;
-    left: 0;
-    max-height: 150px;
-    overflow:scroll;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-    border-bottom:1px solid #D4D4D4;
-    border-left:1px solid #D4D4D4;
-    border-right:1px solid #D4D4D4;
+
+.footer-link {
+    font-family: 'Open Sans', sans-serif;
+    text-decoration: none;
+    color: #212529;
 }
-.screening-link{
-    display:block;
+
+.footer-link:hover {
+    font-weight: bold;
+    color: #212529;
 }
