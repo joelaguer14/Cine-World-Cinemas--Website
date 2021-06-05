@@ -43,7 +43,7 @@ public class HibernateUtil {
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5InnoDBDialect");
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-                settings.put(Environment.HBM2DDL_AUTO, "create");
+                settings.put(Environment.HBM2DDL_AUTO, "none");
 
                 // IMPORTANT HBM2DDL_AUTO +++++++++++++
                 // validate: validate the schema, makes no changes to the database.

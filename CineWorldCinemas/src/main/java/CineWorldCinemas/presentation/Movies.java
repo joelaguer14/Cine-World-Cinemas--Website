@@ -30,16 +30,27 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
-@Path("/Movies")
+@Path("/movies")
 public class Movies {
-    String location="C:/cinemaImages";
-    
+
+    String location = "C:/cinemaImages";
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Movie> search(@DefaultValue("") @QueryParam("nombre") String nombre) { 
+    public List<Movie> search(@DefaultValue("") @QueryParam("nombre") String nombre) {
         return Service.instance().findMoviesByName(nombre);
-    } 
-    
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void add(Movie movie) {
+        try {
+            Service.instance().saveMovie(movie);
+        } catch (Exception ex) {
+            throw new NotAcceptableException(ex);
+        }
+    }
+
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -47,66 +58,55 @@ public class Movies {
         try {
             return Service.instance().findMovieById(id);
         } catch (Exception ex) {
-            throw new NotFoundException(ex); 
+            throw new NotFoundException(ex);
         }
-    }
-    
-    @GET
-    @Path("{cedula}/imagen")
-    @Produces("image/png")
-    public Response getImge(@PathParam("cedula") String cedula) throws IOException {
-        File file = new File(location+cedula);
-        ResponseBuilder response = Response.ok((Object) file);
-        return response.build();
-    }    
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON) 
-    public void add(Movie movie) {  
-        try {
-            Service.instance().saveMovie(movie);
-        } catch (Exception ex) {
-            throw new NotAcceptableException(ex); 
-        }
-    }
-    
-    @POST
-    @Consumes(MediaType.MULTIPART_FORM_DATA) 
-    @Path("{cedula}/imagen")
-    public void addImage(@PathParam("cedula") String cedula, @FormDataParam("imagen") InputStream imagenStream) {  
-        try{
-                int read = 0;
-                byte[] bytes = new byte[1024];
-
-                OutputStream out = new FileOutputStream(new File(location + cedula));
-                while ((read = imagenStream.read(bytes)) != -1){out.write(bytes, 0, read);}
-                out.flush();
-                out.close();
-            } catch (Exception ex) {
-                throw new NotAcceptableException(ex); 
-            }
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void update(Movie movie) {  
+    public void update(Movie movie) {
         try {
             Service.instance().updateMovie(movie);
         } catch (Exception ex) {
-            throw new NotFoundException(ex); 
+            throw new NotFoundException(ex);
         }
     }
-    
 
     @DELETE
     @Path("{id}")
-    public void del(@PathParam("id") int id) {
+    public void delete(@PathParam("id") int id) {
         try {
             Service.instance().deleteMovieById(id);
         } catch (Exception ex) {
-            throw new NotFoundException(ex); 
+            throw new NotFoundException(ex);
         }
     }
-      
-}
 
+    @GET
+    @Path("{id}/imagen")
+    @Produces("image/png")
+    public Response getImage(@PathParam("id") String id) throws IOException {
+        File file = new File(location + id);
+        ResponseBuilder response = Response.ok((Object) file);
+        return response.build();
+    }
+
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Path("{id}/imagen")
+    public void addImage(@PathParam("id") String id, @FormDataParam("imagen") InputStream imagenStream) {
+        try {
+            int read;
+            byte[] bytes = new byte[1024];
+
+            OutputStream out = new FileOutputStream(new File(location + id));
+            while ((read = imagenStream.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+            out.flush();
+            out.close();
+        } catch (IOException ex) {
+            throw new NotAcceptableException(ex);
+        }
+    }
+}

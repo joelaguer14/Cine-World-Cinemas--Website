@@ -35,8 +35,7 @@ public class SeatReserved implements Serializable {
     public SeatReserved() {
     }
 
-    public SeatReserved(int id, Seat seat, Ticket ticket, Screening screening) {
-        this.id = id;
+    public SeatReserved(Seat seat, Ticket ticket, Screening screening) {
         this.seat = seat;
         this.ticket = ticket;
         this.screening = screening;

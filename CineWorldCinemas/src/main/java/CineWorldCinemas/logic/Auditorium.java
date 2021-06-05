@@ -38,8 +38,7 @@ public class Auditorium implements Serializable {
         this.seatsList = new ArrayList<>();
     }
 
-    public Auditorium(int id, String name, int seatsNumber) {
-        this.id = id;
+    public Auditorium(String name, int seatsNumber) {
         this.name = name;
         this.seatsNumber = seatsNumber;
     }

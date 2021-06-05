@@ -46,8 +46,7 @@ public class Screening implements Serializable {
         this.ticketsList = new ArrayList<>();
     }
 
-    public Screening(int id, Movie movie, Date screeningStart) {
-        this.id = id;
+    public Screening(Movie movie, Date screeningStart) {
         this.movie = movie;
         this.screeningStart = screeningStart;
         this.seatsReservedList = new ArrayList<>();
