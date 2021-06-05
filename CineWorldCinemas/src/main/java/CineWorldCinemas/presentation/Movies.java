@@ -28,7 +28,7 @@ import javax.ws.rs.NotAcceptableException;
 import javax.ws.rs.POST;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
-//import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 @Path("/Movies")
 public class Movies {
@@ -70,22 +70,22 @@ public class Movies {
         }
     }
     
-//    @POST
-//    @Consumes(MediaType.MULTIPART_FORM_DATA) 
-//    @Path("{cedula}/imagen")
-//    public void addImage(@PathParam("cedula") String cedula, @FormDataParam("imagen") InputStream imagenStream) {  
-//        try{
-//                int read = 0;
-//                byte[] bytes = new byte[1024];
-//
-//                OutputStream out = new FileOutputStream(new File(location + cedula));
-//                while ((read = imagenStream.read(bytes)) != -1){out.write(bytes, 0, read);}
-//                out.flush();
-//                out.close();
-//            } catch (Exception ex) {
-//                throw new NotAcceptableException(ex); 
-//            }
-//    }
+    @POST
+    @Consumes(MediaType.MULTIPART_FORM_DATA) 
+    @Path("{cedula}/imagen")
+    public void addImage(@PathParam("cedula") String cedula, @FormDataParam("imagen") InputStream imagenStream) {  
+        try{
+                int read = 0;
+                byte[] bytes = new byte[1024];
+
+                OutputStream out = new FileOutputStream(new File(location + cedula));
+                while ((read = imagenStream.read(bytes)) != -1){out.write(bytes, 0, read);}
+                out.flush();
+                out.close();
+            } catch (Exception ex) {
+                throw new NotAcceptableException(ex); 
+            }
+    }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
