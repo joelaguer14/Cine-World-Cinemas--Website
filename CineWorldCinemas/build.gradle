@@ -9,6 +9,7 @@ repositories {
 dependencies {
     providedCompile 'javax:javaee-web-api:8.0'
     implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '3.0.0-RC1'
+    implementation group: 'org.glassfish.jersey.media', name: 'jersey-media-multipart', version: '3.0.1'
     compile 'com.itextpdf:itextg:5.5.9'
     compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.30.Final'

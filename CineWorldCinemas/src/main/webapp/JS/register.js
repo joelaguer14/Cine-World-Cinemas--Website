@@ -4,8 +4,39 @@
  * and open the template in the editor.
  */
 
-$('.li-modal').on('click', function (e) {
-    e.preventDefault();
-    $('#register-modal').modal('show').find('.modal-content').load($(this).attr('href'));
-});
-
+//function loaded() {
+//    $("register-button").on("click", function() {
+//       if(!validar()) {
+//           register();
+//       } 
+//    });
+//}
+//
+//$(loaded);
+//
+//function validate() {
+//    var error = false;
+//    $("input").each(function() {
+//        if(!$(this).val()) {
+//            $("#alert").show();
+//            error = true;
+//        }
+//    });
+//    return error;
+//}
+//
+//function register() {
+//    user = {
+//        id : $("#register-id").val(),
+//        name : $("#register-fullname").val(),
+//        email : $("#register-email").val(),
+//        password : $("register-password").val(),
+//        administrator : 0
+//    };
+//    
+//    //ajax
+//}
+//
+//function errorMessage() {
+//    
+//}
