@@ -27,8 +27,15 @@ and open the template in the editor.
                             <li class="nav-item">
                                 <a id="login-link" class="nav-link li-modal" href="/CineWorldCinemas/presentation/login/View.html">Log In</a>                 
                             </li>
-                            <li class="nav-item">
-                                <a id="login-link" class="nav-link li-modal" href="/CineWorldCinemas/presentation/admin/registerMovies.html">Register Movie</a>                 
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Add new...
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="/CineWorldCinemas/presentation/admin/RegisterMovies.html">Movie</a></li>
+                                    <li><a class="dropdown-item" href="/CineWorldCinemas/presentation/admin/RegisterAuditorium.html">Auditorium</a></li>
+                                    <li><a class="dropdown-item" href="/CineWorldCinemas/presentation/admin/RegisterScreenings.html">Screenings</a></li>
+                                </ul>
                             </li>
                         </ul>
                         <form class="d-flex">
@@ -43,6 +50,6 @@ and open the template in the editor.
 </header>
 
 <script>
-var url = "/CineWorldCinemas/JS/modals.js";
-$.getScript(url);
+    var url = "/CineWorldCinemas/JS/modals.js";
+    $.getScript(url);
 </script>
