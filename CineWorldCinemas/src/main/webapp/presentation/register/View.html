@@ -4,30 +4,29 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-
 <div class="modal-header">
     <h5 class="modal-title fs-3">REGISTER</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
-    <form class = "form-box">
+    <form class = "form-box b">
         <div class="form-input mb-3">
             <span><i class="fa fa-id-card" ></i></span>
-            <input id="register-id" type="text" name="userId" placeholder="ID" tabindex="10" required>
+            <input class="register-input" id="register-id" type="text" name="userId" placeholder="ID" tabindex="10" required>
         </div>
         <div class="form-input mb-3">
             <span><i class="fa fa-user" aria-hidden="true"></i></span>
-            <input id="register-fullname" type="text" name="userFullName" placeholder="Full name" tabindex="10" required>
+            <input class="register-input" id="register-fullname" type="text" name="userFullName" placeholder="Full name" tabindex="10" required>
         </div>
         <div class="form-input mb-3">
             <span><i class="fa fa-envelope" aria-hidden="true"></i></span>
-            <input id="register-email" type="email" name="userEmail" placeholder="Email" tabindex="10" required>
+            <input class="register-input" id="register-email" type="email" name="userEmail" placeholder="Email" tabindex="10" required>
         </div>
         <div class="form-input mb-3">
             <span><i class="fa fa-key"></i></span>
-            <input id="register-password" type="password" name="userPassword" placeholder="Password" tabindex="10" required>
+            <input class="register-input" id="register-password" type="password" name="userPassword" placeholder="Password" tabindex="10" required>
         </div>
-        <button id="register-button" class="w-100 w-100 btn btn-secondary" type="submit">Sign Up</button>
+        <button id="register-button" class="w-100 w-100 btn btn-secondary" type="button">Sign Up</button>
     </form>
 </div>
 <div class="modal-footer text-center">
@@ -35,6 +34,6 @@ and open the template in the editor.
 </div>
 
 <script>
-var url = "/CineWorldCinemas/JS/register.js";
-$.getScript(url);
+    var url = "/CineWorldCinemas/JS/register.js";
+    $.getScript(url);
 </script>

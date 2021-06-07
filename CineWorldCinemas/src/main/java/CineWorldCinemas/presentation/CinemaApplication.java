@@ -22,6 +22,7 @@ public class CinemaApplication extends Application {
         HashSet<Class<?>> classes = new HashSet<>();
         classes.add(MultiPartFeature.class);
         classes.add(Movies.class);
+        classes.add(Register.class);
         return classes;
     }   
 }
