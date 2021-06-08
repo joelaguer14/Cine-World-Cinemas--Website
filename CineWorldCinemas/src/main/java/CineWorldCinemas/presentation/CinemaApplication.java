@@ -23,6 +23,7 @@ public class CinemaApplication extends Application {
         classes.add(MultiPartFeature.class);
         classes.add(Movies.class);
         classes.add(Register.class);
+        classes.add(Login.class);
         return classes;
     }   
 }

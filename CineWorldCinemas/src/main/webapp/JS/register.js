@@ -16,7 +16,7 @@ $(loaded);
 
 function validate() {
     var error = false;
-    $('.register-input').each(function () {
+    $(".register-input").each(function () {
         if (!$(this).val()) {
             $("#alert").show();
             error = true;
