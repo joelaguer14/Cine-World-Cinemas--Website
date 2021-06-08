@@ -4,6 +4,13 @@
  * and open the template in the editor.
  */
 
-function(){
-    return null;
+var movie={title:"", description:"", duration:0, price:0.0, image:""};
+
+function loaded(){
+    $('#save-movie-btn').off('click').on('click', load);
 };
+$(loaded);
+function load(){
+        movie = Object.fromEntries( (new FormData($("#formulario").get(0))).entries());  
+        alert(movie);
+    }
