@@ -144,6 +144,14 @@ body {
     color: #212529;
 }
 
+.register-container{
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
 /*Forms*/
 
 input.invalid {box-shadow: 0 0 1px 1px red;}
