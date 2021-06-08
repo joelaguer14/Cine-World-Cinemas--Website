@@ -30,18 +30,17 @@ if (userJSON !== null) {
     if (user.isAdmin === false) {
         menu += "<li class='nav-item'> <a class='nav-link' href='#'>History</a> </li>";
     } else {
-
-    }
-    menu += "<li class='nav-item dropdown'>" +
+        menu += "<li class='nav-item dropdown'>" +
                 "<a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>" +
-                    "Add new..." +
-                 "</a>" +
+                "Add new..." +
+                "</a>" +
                 "<ul class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>" +
-                    "<li><a class='dropdown-item' href='/CineWorldCinemas/presentation/admin/RegisterMovies.html'>Movie</a></li>" +
-                    "<li><a class='dropdown-item' href='/CineWorldCinemas/presentation/admin/RegisterAuditorium.html'>Auditorium</a></li>" +
-                    "<li><a class='dropdown-item' href='/CineWorldCinemas/presentation/admin/RegisterScreenings.html'>Screenings</a></li>" +
+                "<li><a class='dropdown-item' href='/CineWorldCinemas/presentation/admin/RegisterMovies.html'>Movie</a></li>" +
+                "<li><a class='dropdown-item' href='/CineWorldCinemas/presentation/admin/RegisterAuditorium.html'>Auditorium</a></li>" +
+                "<li><a class='dropdown-item' href='/CineWorldCinemas/presentation/admin/RegisterScreenings.html'>Screenings</a></li>" +
                 "</ul>" +
-            "</li>";
+                "</li>";
+    }
 
     menu += "<li class='nav-item'>" +
             "<a class='nav-link' id='logout-link' href='http://localhost:8080/CineWorldCinemas/'>Log out</a>" +
