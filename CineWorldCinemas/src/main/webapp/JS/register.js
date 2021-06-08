@@ -3,57 +3,75 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var user = {email: "", id: "", name: "", password: ""};
+var url = "http://localhost:8080/CineWorldCinemas/";
 
-function loaded() {
-    $("#register-button").on("click", function () {
-        if (!validate()) {
-            register();
-        }
-    });
+function reset() {
+    user = {email: "", id: "", name: "", password: ""};
 }
-
-$(loaded);
 
 function validate() {
     var error = false;
-    $(".register-input").each(function () {
-        if (!$(this).val()) {
-            $("#alert").show();
-            error = true;
-        }
-    });
-    return error;
+    $("#register-modal-form input").removeClass("invalid");
+    error |= $("#register-modal-form input[type='text']").filter((i, e) => {
+        return e.value === '';
+    }).length > 0;
+    $("#register-modal-form input[type='text']").filter((i, e) => {
+        return e.value === '';
+    }).addClass("invalid");
+
+    error |= $("#register-modal-form input[type='email']").filter((i, e) => {
+        return e.value === '';
+    }).length > 0;
+    $("#register-modal-form input[type='email']").filter((i, e) => {
+        return e.value === '';
+    }).addClass("invalid");
+
+    error |= $("#register-modal-form input[type='password']").filter((i, e) => {
+        return e.value === '';
+    }).length > 0;
+    $("#register-modal-form input[type='password']").filter((i, e) => {
+        return e.value === '';
+    }).addClass("invalid");
+    return !error;
 }
-
-function register() {
-    user = {
-        id: $("#register-id").val(),
-        name: $("#register-fullname").val(),
-        email: $("#register-email").val(),
-        password: $("#register-password").val(),
-        administrator: 0
-    };
-
-    $.ajax({type: "POST", url: "/CineWorldCinemas/api/register/", data: JSON.stringify(user), contentType: "application/json"})
-            .then(() => {
-                window.location.replace("http://localhost:8080/CineWorldCinemas/");
-            },
-                    (error) => {
-                alert(errorMessage(error.status));
-            });
+function load() {
+    user = Object.fromEntries((new FormData($("#register-modal-form").get(0))).entries());
+    user.isAdmin = false;
 }
-
-function errorMessage(status) {
-    switch (status) {
-        case 404:
-            return "User not found";
-        case 403:
-            return "Access denied";
-        case 405:
-            return "Unauthorized user";
-        case 406:
-            return "Duplicated user";
-        default:
-            return "Error: " + status;
+function add() {
+    load();
+    console.log(user);
+    if (!validate()) {
+        console.log("validate");
+        return;
     }
+    let request = new Request(url + 'api/register', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(user)});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#register-modal #error"));
+            return;
+        }
+        reset();
+        $('#register-modal').modal('hide');
+    })();
 }
+
+
+function loaded() {
+    let request = new Request(url + 'presentation/Register.html', {method: 'GET'});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#register-modal #error"));
+            return;
+        }
+        content = await response.text();
+        $('body').append(content);
+        $("#register-button").click(add);
+    })();
+
+}
+
+$(loaded);  

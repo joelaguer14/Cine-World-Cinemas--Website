@@ -43,7 +43,7 @@ if (userJSON !== null) {
     }
 
     menu += "<li class='nav-item'>" +
-            "<a class='nav-link' id='logout-link' href='http://localhost:8080/CineWorldCinemas/'>Log out</a>" +
+            "<a class='nav-link' id='logout-link' href='http://localhost:8080/CineWorldCinemas/'>Log out [" + user.name + "]</a>" +
             "</li>";
 
 } else {
