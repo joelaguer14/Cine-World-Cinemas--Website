@@ -8,6 +8,7 @@ package CineWorldCinemas.presentation;
 import CineWorldCinemas.logic.Service;
 import CineWorldCinemas.logic.User;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.NotAcceptableException;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
@@ -21,7 +22,8 @@ public class Register {
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON) 
-    public void register(User user) throws Exception{ 
+    public void register(User user) throws Exception {
         Service.instance().saveUser(user);
+     
     }
 }

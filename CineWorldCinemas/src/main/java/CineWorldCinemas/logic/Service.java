@@ -5,7 +5,6 @@
  */
 package CineWorldCinemas.logic;
 
-
 import CineWorldCinemas.data.AuditoriumDAO;
 import CineWorldCinemas.data.MovieDAO;
 import CineWorldCinemas.data.ScreeningDAO;
@@ -30,7 +29,6 @@ public class Service {
         }
         return uniqueInstance;
     }
-
 
     private AuditoriumDAO auditoriumDAO;
     private MovieDAO movieDAO;
@@ -76,15 +74,17 @@ public class Service {
         auditoriumDAO.delete(auditorium);
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Movie C-R-U-D methods. Click on the + sign on the left to edit the code.">
     public Movie findMovieById(int id) {
         return movieDAO.findById(id);
     }
-    public List<Movie> findMoviesByName(String name){
-        List<Movie> movies=new ArrayList<>();
+
+    public List<Movie> findMoviesByName(String name) {
+        List<Movie> movies = new ArrayList<>();
         this.findAllMovies().stream().filter(movie -> (movie.getTitle().
-                contains(name))).forEachOrdered(movie -> { movies.add(movie);
+                contains(name))).forEachOrdered(movie -> {
+            movies.add(movie);
         });
         return movies;
     }
@@ -109,7 +109,7 @@ public class Service {
         movieDAO.delete(movie);
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Screening C-R-U-D methods. Click on the + sign on the left to edit the code.">
     public Screening findScreeningById(int id) {
         return screeningDAO.findById(id);
@@ -135,7 +135,7 @@ public class Service {
         screeningDAO.delete(screening);
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Seat C-R-U-D methods. Click on the + sign on the left to edit the code.">
     public Seat findSeatById(int id) {
         return seatDAO.findById(id);
@@ -161,7 +161,7 @@ public class Service {
         seatDAO.delete(seat);
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="SeatReserved C-R-U-D methods. Click on the + sign on the left to edit the code.">
     public SeatReserved findSeatReservedById(int id) {
         return seatReservedDAO.findById(id);
@@ -187,7 +187,7 @@ public class Service {
         seatReservedDAO.delete(seatReserved);
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="Ticket C-R-U-D methods. Click on the + sign on the left to edit the code.">
     public Ticket findTicketById(int id) {
         return ticketDAO.findById(id);
@@ -223,7 +223,7 @@ public class Service {
         return userDAO.findAll();
     }
 
-    public User saveUser(User user) {
+    public User saveUser(User user) throws Exception {
         return userDAO.save(user);
     }
 
