@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+var test = new Array();
+var cont = 0;
+var url = "http://localhost:8080/CineWorldCinemas/";
 var movies = [
     {
         title: "Spiderman",
@@ -57,14 +59,6 @@ var movies = [
     }
 ];
 
-var cont = 0;
-
-function loaded() {
-    listMovies(movies);
-}
-
-$(loaded);
-
 function listMovies(movies) {
     var carouselContent = $("#carousel-content");
     var rowContent = $("#row-content");
@@ -113,3 +107,10 @@ function rowContentDisplay(rowContent, movie) {
             "</div>"
             );
 }
+
+
+function loaded() {    
+    listMovies(movies);
+}
+
+$(loaded);
