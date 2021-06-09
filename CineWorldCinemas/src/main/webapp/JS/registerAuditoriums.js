@@ -27,9 +27,7 @@ function load() {
 }
 function add() {
     load();
-    console.log(auditorium);
     if (!validate()) {
-        console.log("validate");
         return;
     }
     let request = new Request(url + 'api/register/auditorium', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(auditorium)});
