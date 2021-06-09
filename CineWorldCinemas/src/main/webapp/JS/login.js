@@ -35,7 +35,6 @@ function login() {
                 break;
         }
     })();
-
 }
 
 function loginValidate() {

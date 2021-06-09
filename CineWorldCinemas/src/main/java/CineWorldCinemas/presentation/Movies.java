@@ -37,7 +37,7 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 @Path("/movies")
 public class Movies {
 
-    String location = "C:/cinemaImages";
+    String location = "C:/CineWorldCinemasImages/";
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -46,6 +46,7 @@ public class Movies {
     }
 
     @POST
+    @Path("register")
     @Consumes(MediaType.APPLICATION_JSON)
     public void add(Movie movie) {
         try {
@@ -87,8 +88,8 @@ public class Movies {
     }
 
     @GET
-    @Path("{id}/imagen")
-    @Produces("image/png")
+    @Path("{id}/image")
+    @Produces("image/jpg")
     public Response getImage(@PathParam("id") String id) throws IOException {
         File file = new File(location + id);
         ResponseBuilder response = Response.ok((Object) file);
@@ -97,8 +98,8 @@ public class Movies {
 
     @POST
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Path("{id}/imagen")
-    public void addImage(@PathParam("id") String id, @FormDataParam("imagen") InputStream imagenStream) {
+    @Path("{title}/image")
+    public void addImage(@PathParam("title") String id, @FormDataParam("image") InputStream imagenStream) {
         try {
             int read;
             byte[] bytes = new byte[1024];

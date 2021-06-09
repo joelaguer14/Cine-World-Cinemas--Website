@@ -28,18 +28,33 @@ function load() {
     movie = Object.fromEntries((new FormData($("#register-movie-form").get(0))).entries());
 }
 
+function addImage() {
+    var imageData = new FormData();
+    imageData.append("title", movie.title);
+    imageData.append("image", $("#register-movie-image").get(0).files[0]);
+    let request = new Request(url + 'api/movies/' + movie.title + "/image", {method: 'POST', body: imageData});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#add-modal #errorDiv"));
+            return;
+        }
+    })();
+}
+
 function add() {
     load();
     if (!validate()) {
         return;
     }
-    let request = new Request(url + 'api/register/movie', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(movie)});
+    let request = new Request(url + 'api/movies/register', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(movie)});
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
             errorMessage(response.status, $("#register-movie-form #error"));
             return;
         }
+        addImage();
         reset();
         render();
     })();

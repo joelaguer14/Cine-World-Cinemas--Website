@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 var test = new Array();
+
 var cont = 0;
+
 var url = "http://localhost:8080/CineWorldCinemas/";
+
 var movies = [
     {
         title: "Spiderman",
@@ -107,7 +110,6 @@ function rowContentDisplay(rowContent, movie) {
             "</div>"
             );
 }
-
 
 function loaded() {    
     listMovies(movies);

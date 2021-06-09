@@ -23,18 +23,10 @@ import javax.ws.rs.core.MediaType;
 public class Register {
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void registerUser(User user) throws Exception {
-        Service.instance().saveUser(user);
-
-    }
-
-    @POST
     @Path("auditorium")
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerAuditorium(Auditorium auditorium) throws Exception {
         Service.instance().saveAuditorium(auditorium);
-
     }
 
     @POST
@@ -42,7 +34,6 @@ public class Register {
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerMovie(Movie movie) throws Exception {
         Service.instance().saveMovie(movie);
-
     }
 
     @POST
@@ -50,6 +41,5 @@ public class Register {
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerScreening(Screening screening) throws Exception {
         Service.instance().saveScreening(screening);
-
     }
 }
