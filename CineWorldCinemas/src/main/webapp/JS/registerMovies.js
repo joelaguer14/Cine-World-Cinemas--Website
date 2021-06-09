@@ -4,12 +4,12 @@
  * and open the template in the editor.
  */
 
-var movie = {title: "", description: "",duration:0,price:0};
+var movie = {title: "", description: "", duration: 0, price: 0};
 
 var url = "http://localhost:8080/CineWorldCinemas/";
 
 function reset() {
-   movie = {title: "", description: "",duration:0,price:0};
+    movie = {title: "", description: "", duration: 0, price: 0};
 }
 
 function validate() {
@@ -23,9 +23,11 @@ function validate() {
     }).addClass("invalid");
     return !error;
 }
+
 function load() {
     movie = Object.fromEntries((new FormData($("#register-movie-form").get(0))).entries());
 }
+
 function add() {
     load();
     if (!validate()) {
@@ -42,7 +44,8 @@ function add() {
         render();
     })();
 }
-function render(){
+
+function render() {
     $("#register-movie-price").val("");
     $("#register-movie-duration").val("");
     $("#register-movie-title").val("");

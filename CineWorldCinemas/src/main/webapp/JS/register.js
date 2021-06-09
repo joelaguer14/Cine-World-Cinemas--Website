@@ -35,10 +35,12 @@ function validate() {
     }).addClass("invalid");
     return !error;
 }
+
 function load() {
     user = Object.fromEntries((new FormData($("#register-modal-form").get(0))).entries());
     user.isAdmin = false;
 }
+
 function add() {
     load();
     console.log(user);
@@ -58,7 +60,6 @@ function add() {
     })();
 }
 
-
 function loaded() {
     let request = new Request(url + 'presentation/Register.html', {method: 'GET'});
     (async () => {
@@ -71,7 +72,6 @@ function loaded() {
         $('body').append(content);
         $("#register-button").click(add);
     })();
-
 }
 
 $(loaded);  
