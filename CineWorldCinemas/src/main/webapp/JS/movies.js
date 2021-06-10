@@ -3,80 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var test = new Array();
-
-var cont = 0;
+var cont = 1;
 
 var url = "http://localhost:8080/CineWorldCinemas/";
 
-var movies = [
-    {
-        title: "Spiderman",
-        imagesrc: "https://pauladeveraescritora.files.wordpress.com/2019/10/spider-man-far-from-home-banner.jpg",
-        description: "Parker is recruited by Nick Fury and Mysterio to face the Elementals while he is on a school trip to Europe.",
-        screenings: ["Jun 28, 3pm/ A2", "Jun 28, 6pm/ B2", "Jun 29, 3pm/ A2", "Jun 28, 3pm/ A2", "Jun 28, 6pm/ B2", "Jun 29, 3pm/ A2", "Jun 28, 3pm/ A2", "Jun 28, 6pm/ B2", "Jun 29, 3pm/ A2"],
-        duration: 90
-    },
-    {
-        title: "Batman",
-        imagesrc: "http://splashreport.com/wp-content/uploads/2017/01/legobatman-header.png",
-        description: "In the Lego Universe, Batman continues to protect Gotham City and fight crime. During his latest mission to stop Joker" +
-                " from destroying the city, he hurts his arch-rival's feelings by telling him he is not as important in his life as he thinks he " +
-                "is, leading Joker to seek the ultimate revenge on him.In the Lego Universe, Batman continues to protect Gotham City and fight crime." +
-                " During his latest mission to stop Joker from destroying the city, he hurts his arch-rival's feelings by telling him he is not as important" +
-                " in his life as he thinks he is, leading Joker to seek the ultimate revenge on him",
-        screenings: ["Jun 28, 5pm/ B3", "Jun 29, 6pm/ A3", "Jun 30, 2pm/ C2"],
-        duration: 90
-    },
-    {
-        title: "Superman",
-        imagesrc: "https://collider.com/wp-content/uploads/man-of-steel-poster-banner.jpg",
-        description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter" +
-                "-cultural revolution against the wealthy in a decaying Gotham City.",
-        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"],
-        duration: 90
-    },
-    {
-        title: "a",
-        imagesrc: "https://collider.com/wp-content/uploads/man-of-steel-poster-banner.jpg",
-        description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter" +
-                "-cultural revolution against the wealthy in a decaying Gotham City.",
-        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"],
-        duration: 90
-    },
-    {
-        title: "b",
-        imagesrc: "https://collider.com/wp-content/uploads/man-of-steel-poster-banner.jpg",
-        description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter" +
-                "-cultural revolution against the wealthy in a decaying Gotham City.",
-        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"],
-        duration: 90
-    },
-    {
-        title: "c",
-        imagesrc: "https://collider.com/wp-content/uploads/man-of-steel-poster-banner.jpg",
-        description: "Set in 1981, it follows Arthur Fleck, a failed clown and stand-up comedian whose descent into insanity and nihilism inspires a violent counter" +
-                "-cultural revolution against the wealthy in a decaying Gotham City.",
-        screenings: ["Jun 29, 4pm/ C1", "Jun 30, 5pm/ A1", "Jul 1, 2pm/ C1"],
-        duration: 90
-    }
-];
-
-function listMovies(movies) {
-    var carouselContent = $("#carousel-content");
-    var rowContent = $("#row-content");
-    carouselContent.html("");
-    movies.forEach((movie) => {
-        carouselContentDisplay(carouselContent, movie);
-        rowContentDisplay(rowContent, movie);
-    });
-}
+var movies = new Array();
 
 function carouselContentDisplay(carouselContent, movie) {
     var indicator = $("#indicators");
     carouselContent.append(
-            "<div class='carousel-item active' id='" + movie.title + "'>" +
-            "<div class='overlay-image' style='background-image:url(" + movie.imagesrc + ");'> </div>" +
+            "<div class='carousel-item active' id='" + movie.id + "'>" +
+            "<div class='overlay-image' style='background-image:url(" + url + "api/movies/" + movie.title + "/image" + ");'> </div>" +
             "<div class='container'>" +
             "<div class='carousel-caption text-start'>" +
             "</div>" +
@@ -87,19 +24,19 @@ function carouselContentDisplay(carouselContent, movie) {
         indicator.append("<button type='button' data-bs-target='#myCarousel' data-bs-slide-to='" + cont + "' class='active' aria-current='true' aria-label='Slide " + cont + "'></button>");
     } else {
         indicator.append("<button type='button' data-bs-target='#myCarousel' data-bs-slide-to='" + cont + "' aria-label='Slide " + cont + "'></button>");
-        $("#" + movie.title).removeClass("active");
+        $("#" + movie.id).removeClass("active");
     }
     cont++;
 }
 
 function rowContentDisplay(rowContent, movie) {
     let screeningsTxt = "";
-    movie.screenings.forEach((s) => screeningsTxt += "<a href=# class='screening-link'>" + s + "</a>");
+    movie.screeningsList.forEach((s) => screeningsTxt += "<a href=# class='screening-link'>" + s + "</a>");
 
     rowContent.append(
             "<div class='col'>" +
             "<div class='card my-card'>" +
-            "<img class='image-grid d-block w-100 ' src='" + movie.imagesrc + "' alt=''>" +
+            "<img class='image-grid d-block w-100' src='" + url + "api/movies/" + movie.title + "/image' alt=''>" +
             "<div class='card-body'>" +
             "<div class='screenings text-center'>" + screeningsTxt + "</div>" +
             "<div class='d-flex justify-content-between align-items-center'>" +
@@ -111,8 +48,96 @@ function rowContentDisplay(rowContent, movie) {
             );
 }
 
-function loaded() {    
-    listMovies(movies);
+function listMovies() {
+    var carouselContent = $("#carousel-content");
+    var rowContent = $("#row-content");
+    carouselContent.html("");
+    movies.forEach((movie) => {
+        carouselContentDisplay(carouselContent, movie);
+        rowContentDisplay(rowContent, movie);
+    });
+}
+
+function fetchAndList() {
+    let request = new Request(url + 'api/movies', {method: 'GET', headers: {}});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
+        movies = await response.json();
+        listMovies();
+    })();
+}
+
+//=========================================================================================================================================================================
+var movie = {title: "", description: "", duration: 0, price: 0};
+
+var url = "http://localhost:8080/CineWorldCinemas/";
+
+function reset() {
+    movie = {title: "", description: "", duration: 0, price: 0};
+}
+
+function validate() {
+    var error = false;
+    $("#register-movie-form input").removeClass("invalid");
+    error |= $("#register-movie-form input[type='text']").filter((i, e) => {
+        return e.value === '';
+    }).length > 0;
+    $("#register-movie-form input[type='text']").filter((i, e) => {
+        return e.value === '';
+    }).addClass("invalid");
+    return !error;
+}
+
+function load() {
+    movie = Object.fromEntries((new FormData($("#register-movie-form").get(0))).entries());
+}
+
+function addImage() {
+    var imageData = new FormData();
+    imageData.append("title", movie.title);
+    imageData.append("image", $("#register-movie-image").get(0).files[0]);
+    let request = new Request(url + 'api/movies/' + movie.title + "/image", {method: 'POST', body: imageData});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#add-modal #errorDiv"));
+            return;
+        }
+    })();
+}
+
+function add() {
+    load();
+    if (!validate()) {
+        return;
+    }
+    let request = new Request(url + 'api/movies/register', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(movie)});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#register-movie-form #error"));
+            return;
+        }
+        addImage();
+        reset();
+        render();
+    })();
+}
+
+function render() {
+    $("#register-movie-price").val("");
+    $("#register-movie-duration").val("");
+    $("#register-movie-title").val("");
+    $("#register-movie-description").val("");
+}
+
+function loaded() {
+    fetchAndList();
+    $("#register-movie-button").click(add);
 }
 
 $(loaded);

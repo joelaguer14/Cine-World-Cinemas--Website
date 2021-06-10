@@ -88,10 +88,10 @@ public class Movies {
     }
 
     @GET
-    @Path("{id}/image")
+    @Path("{title}/image")
     @Produces("image/jpg")
-    public Response getImage(@PathParam("id") String id) throws IOException {
-        File file = new File(location + id);
+    public Response getImage(@PathParam("title") String title) throws IOException {
+        File file = new File(location + title);
         ResponseBuilder response = Response.ok((Object) file);
         return response.build();
     }
