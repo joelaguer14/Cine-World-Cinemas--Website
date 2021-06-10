@@ -6,6 +6,7 @@
 package CineWorldCinemas.logic;
 
 import java.io.Serializable;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 /**
@@ -24,10 +25,12 @@ public class SeatReserved implements Serializable {
     @JoinColumn(name = "id_seat", nullable = false)
     private Seat seat;
 
+    @JsonbTransient
     @ManyToOne()
     @JoinColumn(name = "id_ticket", nullable = false)
     private Ticket ticket;
 
+    @JsonbTransient
     @ManyToOne()
     @JoinColumn(name = "id_screening", nullable = false)
     private Screening screening;

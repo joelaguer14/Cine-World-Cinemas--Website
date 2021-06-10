@@ -5,9 +5,12 @@
  */
 package CineWorldCinemas.logic;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 /**
@@ -16,6 +19,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "seats")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = int.class)
 public class Seat implements Serializable {
 
     @Id
@@ -28,6 +32,7 @@ public class Seat implements Serializable {
     @Column(name = "seat_num")
     private int number;
 
+    @JsonbTransient
     @ManyToOne()
     @JoinColumn(name = "id_auditorium", nullable = false)
     private Auditorium auditorium;

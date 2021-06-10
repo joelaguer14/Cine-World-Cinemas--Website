@@ -20,7 +20,7 @@ public class Main {
          service.saveMovie(new Movie("Anabelle2", "Terror", 120,6.0f));
          service.saveMovie(new Movie("Conjuring", "Terror", 120,6.5f));
          
-         System.out.println(service.findMoviesByName("Ana"));
+         System.out.println(service.findAllMovies());
          
          
          

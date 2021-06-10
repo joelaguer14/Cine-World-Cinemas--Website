@@ -8,6 +8,7 @@ package CineWorldCinemas.logic;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 /**
@@ -22,10 +23,12 @@ public class Ticket implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
+    @JsonbTransient
     @ManyToOne()
     @JoinColumn(name = "id_screening", nullable = false)
     private Screening screening;
     
+    @JsonbTransient
     @ManyToOne()
     @JoinColumn(name = "id_user", nullable = true)
     private User user;

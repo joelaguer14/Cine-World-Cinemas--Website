@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 
 /**
@@ -23,10 +24,12 @@ public class Screening implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @JsonbTransient
     @ManyToOne()
     @JoinColumn(name = "id_movie", nullable = false)
     private Movie movie;
 
+    @JsonbTransient
     @ManyToOne()
     @JoinColumn(name = "id_auditorium", nullable = false)
     private Auditorium auditorium;

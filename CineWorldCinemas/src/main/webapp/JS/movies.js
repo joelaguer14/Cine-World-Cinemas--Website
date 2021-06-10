@@ -31,14 +31,14 @@ function carouselContentDisplay(carouselContent, movie) {
 
 function rowContentDisplay(rowContent, movie) {
     let screeningsTxt = "";
-    movie.screeningsList.forEach((s) => screeningsTxt += "<a href=# class='screening-link'>" + s + "</a>");
+    //movie.screeningsList.forEach((s) => screeningsTxt += "<a href=# class='screening-link'>" + s + "</a>");
 
     rowContent.append(
             "<div class='col'>" +
             "<div class='card my-card'>" +
             "<img class='image-grid d-block w-100' src='" + url + "api/movies/" + movie.title + "/image' alt=''>" +
             "<div class='card-body'>" +
-            "<div class='screenings text-center'>" + screeningsTxt + "</div>" +
+           // "<div class='screenings text-center'>" + screeningsTxt + "</div>" +
             "<div class='d-flex justify-content-between align-items-center'>" +
             "<small class='card-body-text text-muted px-2'>Duration: " + movie.duration + " minutes</small>" +
             "</div>" +
