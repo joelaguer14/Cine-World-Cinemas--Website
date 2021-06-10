@@ -21,6 +21,7 @@ and open the template in the editor.
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>    
         <script src="/CineWorldCinemas/JS/menu.js"></script>
         <script src="/CineWorldCinemas/JS/login.js"></script>
+        <script src="/CineWorldCinemas/JS/screenings.js"></script>
         <script src="/CineWorldCinemas/JS/footer.js"></script>
     </head>
     <body>
@@ -30,31 +31,31 @@ and open the template in the editor.
                     <h4 class="title text-center mt-4">
                         Create Movie
                     </h4>
-                    <form id="register-movie-form" class="form-box px-3" enctype="multipart/form-data" method="post">
+                    <form id="register-screening-form" class="form-box px-3" enctype="multipart/form-data" method="post">
                         <div class="form-input">
 
-                            <select class="form-select" aria-label="Default select example" id="register-screenings-movie" >
-                                <option selected>Select a Movie</option>
+                            <select class="form-select" aria-label="Default select example" id="register-screening-movie" >
+                                <!--<option selected>Select a Movie</option>
                                 <option value="1">Spiderman</option>
                                 <option value="2">Lego Batman</option>
-                                <option value="3">Superman</option>
+                                <option value="3">Superman</option>-->
                             </select>
                         </div>
                         <div class="form-input">
-                            <select class="form-select" aria-label="Default select example" id="register-screenings-auditorium" >
-                                <option selected>Select a Auditorium</option>
+                            <select class="form-select" aria-label="Default select example" id="register-screening-auditorium" >
+                                <!--
                                 <option value="1">A1</option>
                                 <option value="2">B2</option>
-                                <option value="3">C3</option>
+                                <option value="3">C3</option>-->
                             </select>
                         </div>
                         <div class="form-input">
                             <span><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                            <input type="datetime-local" id="register-screenings-start" required>
+                            <input type="datetime-local" id="register-screening-start" required>
                         </div>
 
                         <div class="mb-3 text-center">
-                            <button type="submit" class="btn btn-block text-uppercase">
+                            <button type="button" class="btn btn-block text-uppercase" id="register-screening-button" >
                                 Save
                             </button>
                         </div>
