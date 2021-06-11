@@ -71,6 +71,9 @@ function fetchAndList() {
             return;
         }
         movies = await response.json();
+        //console.log(movies);
+        movies = movies.filter((m) => m.screeningsList.length > 0);
+        //console.log(movies);
         listMovies();
     })();
 }
