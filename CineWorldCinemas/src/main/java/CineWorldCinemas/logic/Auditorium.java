@@ -8,6 +8,7 @@ package CineWorldCinemas.logic;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 
@@ -69,6 +70,7 @@ public class Auditorium implements Serializable {
         this.seatsNumber = seatsNumber;
     }
 
+    @JsonbTransient
     public List<Screening> getScreeningsList() {
         return screeningsList;
     }

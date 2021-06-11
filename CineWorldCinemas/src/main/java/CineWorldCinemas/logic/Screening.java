@@ -33,7 +33,7 @@ public class Screening implements Serializable {
     private Auditorium auditorium;
 
     @Column(name = "screeningStart")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date screeningStart;
 
     @OneToMany(mappedBy = "screening")
@@ -73,7 +73,7 @@ public class Screening implements Serializable {
         this.movie = movie;
     }
 
-    @JsonbTransient
+    
     public Auditorium getAuditorium() {
         return auditorium;
     }
@@ -82,7 +82,7 @@ public class Screening implements Serializable {
         this.auditorium = auditorium;
     }
 
-    @JsonbTransient
+    
     public Date getScreeningStart() {
         return screeningStart;
     }

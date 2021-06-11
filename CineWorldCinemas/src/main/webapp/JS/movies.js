@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var cont = 1;
+var cont = 0;
 
 var url = "http://localhost:8080/CineWorldCinemas/";
 
@@ -22,23 +22,27 @@ function carouselContentDisplay(carouselContent, movie) {
             );
     if ($("#indicators").is(':empty')) {
         indicator.append("<button type='button' data-bs-target='#myCarousel' data-bs-slide-to='" + cont + "' class='active' aria-current='true' aria-label='Slide " + cont + "'></button>");
+        console.log(cont);
     } else {
         indicator.append("<button type='button' data-bs-target='#myCarousel' data-bs-slide-to='" + cont + "' aria-label='Slide " + cont + "'></button>");
         $("#" + movie.id).removeClass("active");
+        console.log(cont);
     }
     cont++;
 }
 
 function rowContentDisplay(rowContent, movie) {
     let screeningsTxt = "";
-    //movie.screeningsList.forEach((s) => screeningsTxt += "<a href=# class='screening-link'>" + s + "</a>");
+    movie.screeningsList.forEach((s) => screeningsTxt += "<a href=# class='screening-link'>" + s.screeningStart.split("T")[0] +
+                ", " + s.screeningStart.split("T")[1].split("Z")[0] + ", Auditorium: " + s.auditorium.name + "</a>");
+    console.log(movie.screeningsList);
 
     rowContent.append(
             "<div class='col'>" +
             "<div class='card my-card'>" +
             "<img class='image-grid d-block w-100' src='" + url + "api/movies/" + movie.title + "/image' alt=''>" +
             "<div class='card-body'>" +
-           // "<div class='screenings text-center'>" + screeningsTxt + "</div>" +
+            "<div class='screenings text-center'>" + screeningsTxt + "</div>" +
             "<div class='d-flex justify-content-between align-items-center'>" +
             "<small class='card-body-text text-muted px-2'>Duration: " + movie.duration + " minutes</small>" +
             "</div>" +
