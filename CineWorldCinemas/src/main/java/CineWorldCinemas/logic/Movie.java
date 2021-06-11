@@ -5,12 +5,11 @@
  */
 package CineWorldCinemas.logic;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 /**
  *
@@ -36,6 +35,7 @@ public class Movie implements Serializable {
     @Column(name = "price")
     private float price;
     
+    @JsonManagedReference
     @OneToMany(mappedBy = "movie")
     private List<Screening> screeningsList;
 

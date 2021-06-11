@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 
 /**
  * @author joela
@@ -27,9 +28,11 @@ public class Auditorium implements Serializable {
     @Column(name = "seat_number")
     private int seatsNumber;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "auditorium")
     private List<Screening> screeningsList;
     
+    @JsonManagedReference
     @OneToMany(mappedBy = "auditorium")
     private List<Seat> seatsList;
 

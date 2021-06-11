@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
+import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  *
@@ -23,12 +26,14 @@ public class Ticket implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     
-    @JsonbTransient
+   @JsonBackReference
+   @JsonProperty
     @ManyToOne()
     @JoinColumn(name = "id_screening", nullable = false)
     private Screening screening;
     
-    @JsonbTransient
+    @JsonBackReference
+    @JsonProperty
     @ManyToOne()
     @JoinColumn(name = "id_user", nullable = true)
     private User user;
@@ -36,6 +41,7 @@ public class Ticket implements Serializable {
     @Column(name = "total_price")
     private float totalPrice;
     
+  
     @OneToMany(mappedBy = "ticket")
     private List<SeatReserved> seatsReservedList;
 

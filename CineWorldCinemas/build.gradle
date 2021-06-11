@@ -10,7 +10,7 @@ dependencies {
     providedCompile 'javax:javaee-web-api:8.0'
     implementation group: 'org.apache.pdfbox', name: 'pdfbox', version: '3.0.0-RC1'
     implementation group: 'org.glassfish.jersey.media', name: 'jersey-media-multipart', version: '2.14'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
+    implementation 'org.codehaus.jackson:jackson-core-asl:1.9.2'
     compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.14'
     compile 'com.itextpdf:itextg:5.5.9'
     compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'

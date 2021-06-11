@@ -27,7 +27,9 @@ function validate() {
 }
 
 function load() {
-    screening = Object.fromEntries((new FormData($("#register-screening-form").get(0))).entries());
+    let screeningAux = Object.fromEntries((new FormData($("#register-screening-form").get(0))).entries());
+    screening = {movie: {id: screeningAux.movieId}, auditorium: {id: screeningAux.auditoriumId}, screeningStart: screeningAux.screeningStart};
+    
 }
 
 function add() {
@@ -35,22 +37,23 @@ function add() {
     if (!validate()) {
         return;
     }
-    let request = new Request(url + 'api/register/auditorium', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(auditorium)});
-//    (async () => {
-//        const response = await fetch(request);
-//        if (!response.ok) {
-//            errorMessage(response.status, $("#register-auditorium-form #error"));
-//            return;
-//        }
-//        reset();
-//        render();
-//    })();
+    let request = new Request(url + 'api/register/screening', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(screening)});
+    (async () => {
+        console.log(screening);
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#register-screening-form #error"));
+            return;
+        }
+        reset();
+        render();
+    })();
 }
 
 function render() {
-    $("#register-screening-movie").val(0);
-    $("#register-screening-auditorium").val(0);
-    $("#register-screening-start").val("");
+    $("#register-screening-movie").val(screening.movieId);
+    $("#register-screening-auditorium").val(screening.auditoriumId);
+    $("#register-screening-start").val(screening.screeningStart);
 }
 function fetchAndListMovies() {
     let request = new Request(url + 'api/movies', {method: 'GET', headers: {}});

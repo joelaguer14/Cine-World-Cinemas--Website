@@ -28,30 +28,24 @@ and open the template in the editor.
         <div class="container text-center register-container">
             <div class="card w-50 mt-4 d-inline-block bg-light">
                 <div class="card-body">
-                    <h4 class="title text-center mt-4">
-                        Create Movie
+                    <h4 class="title text-center m-4">
+                        Create Screening
                     </h4>
                     <form id="register-screening-form" class="form-box px-3" enctype="multipart/form-data" method="post">
-                        <div class="form-input">
+                        <div class="form-input p-2">
 
-                            <select class="form-select" aria-label="Default select example" id="register-screening-movie" >
-                                <!--<option selected>Select a Movie</option>
-                                <option value="1">Spiderman</option>
-                                <option value="2">Lego Batman</option>
-                                <option value="3">Superman</option>-->
+                            <select class="form-select " aria-label="Default select example" id="register-screening-movie" name="movieId">
+                                
                             </select>
                         </div>
-                        <div class="form-input">
-                            <select class="form-select" aria-label="Default select example" id="register-screening-auditorium" >
-                                <!--
-                                <option value="1">A1</option>
-                                <option value="2">B2</option>
-                                <option value="3">C3</option>-->
+                        <div class="form-input p-2">
+                            <select class="form-select " aria-label="Default select example" id="register-screening-auditorium" name="auditoriumId">
+                                
                             </select>
                         </div>
-                        <div class="form-input">
+                        <div class="form-input p-2">
                             <span><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                            <input type="datetime-local" id="register-screening-start" required>
+                            <input type="datetime-local" id="register-screening-start" name="screeningStart" required>
                         </div>
 
                         <div class="mb-3 text-center">

@@ -23,6 +23,12 @@ import javax.ws.rs.core.MediaType;
 public class Register {
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void registerUser(User user) throws Exception {
+        Service.instance().saveUser(user);
+    }
+
+    @POST
     @Path("auditorium")
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerAuditorium(Auditorium auditorium) throws Exception {
@@ -40,6 +46,14 @@ public class Register {
     @Path("screening")
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerScreening(Screening screening) throws Exception {
-        Service.instance().saveScreening(screening);
+        Service service = Service.instance();
+        Screening screeningSaved = new Screening();
+
+        screeningSaved.setAuditorium(service.findAuditoriumById(screening.getAuditorium().getId()));
+        screeningSaved.setMovie(service.findMovieById(screening.getId()));
+        screeningSaved.setScreeningStart(screening.getScreeningStart());
+
+        service.saveScreening(screeningSaved);
     }
+
 }
