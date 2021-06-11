@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
-import org.codehaus.jackson.annotate.JsonManagedReference;
 
 /**
  *
@@ -35,7 +34,6 @@ public class Movie implements Serializable {
     @Column(name = "price")
     private float price;
     
-    @JsonManagedReference
     @OneToMany(mappedBy = "movie")
     private List<Screening> screeningsList;
 

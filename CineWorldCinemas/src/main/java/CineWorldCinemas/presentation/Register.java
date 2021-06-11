@@ -46,14 +46,6 @@ public class Register {
     @Path("screening")
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerScreening(Screening screening) throws Exception {
-        Service service = Service.instance();
-        Screening screeningSaved = new Screening();
-
-        screeningSaved.setAuditorium(service.findAuditoriumById(screening.getAuditorium().getId()));
-        screeningSaved.setMovie(service.findMovieById(screening.getId()));
-        screeningSaved.setScreeningStart(screening.getScreeningStart());
-
-        service.saveScreening(screeningSaved);
+        Service.instance().saveScreening(screening);
     }
-
 }

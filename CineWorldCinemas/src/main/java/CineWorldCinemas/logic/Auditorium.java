@@ -32,7 +32,6 @@ public class Auditorium implements Serializable {
     @OneToMany(mappedBy = "auditorium")
     private List<Screening> screeningsList;
     
-    @JsonManagedReference
     @OneToMany(mappedBy = "auditorium")
     private List<Seat> seatsList;
 

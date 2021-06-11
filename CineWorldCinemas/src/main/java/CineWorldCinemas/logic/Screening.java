@@ -11,9 +11,6 @@ import java.util.Date;
 import java.util.List;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
-import org.codehaus.jackson.annotate.JsonBackReference;
-import org.codehaus.jackson.annotate.JsonManagedReference;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  *
@@ -27,28 +24,21 @@ public class Screening implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JsonBackReference
-    @JsonProperty
     @ManyToOne()
     @JoinColumn(name = "id_movie", nullable = false)
     private Movie movie;
-
-    @JsonBackReference
-    @JsonProperty
+    
     @ManyToOne()
     @JoinColumn(name = "id_auditorium", nullable = false)
     private Auditorium auditorium;
 
-    
     @Column(name = "screeningStart")
     @Temporal(TemporalType.DATE)
     private Date screeningStart;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "screening")
     private List<SeatReserved> seatsReservedList;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "screening")
     private List<Ticket> ticketsList;
 
@@ -74,6 +64,7 @@ public class Screening implements Serializable {
         this.id = id;
     }
 
+    @JsonbTransient
     public Movie getMovie() {
         return movie;
     }
@@ -82,6 +73,7 @@ public class Screening implements Serializable {
         this.movie = movie;
     }
 
+    @JsonbTransient
     public Auditorium getAuditorium() {
         return auditorium;
     }
@@ -90,6 +82,7 @@ public class Screening implements Serializable {
         this.auditorium = auditorium;
     }
 
+    @JsonbTransient
     public Date getScreeningStart() {
         return screeningStart;
     }

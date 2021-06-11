@@ -8,8 +8,6 @@ package CineWorldCinemas.logic;
 import java.io.Serializable;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
-import org.codehaus.jackson.annotate.JsonBackReference;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  *
@@ -22,21 +20,15 @@ public class SeatReserved implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-   @JsonBackReference
-   @JsonProperty
+
     @ManyToOne()
     @JoinColumn(name = "id_seat", nullable = false)
     private Seat seat;
 
-   @JsonBackReference
-   @JsonProperty
     @ManyToOne()
     @JoinColumn(name = "id_ticket", nullable = false)
     private Ticket ticket;
 
-    @JsonBackReference
-    @JsonProperty
     @ManyToOne()
     @JoinColumn(name = "id_screening", nullable = false)
     private Screening screening;
@@ -58,6 +50,7 @@ public class SeatReserved implements Serializable {
         this.id = id;
     }
 
+    @JsonbTransient
     public Seat getSeat() {
         return seat;
     }
@@ -66,6 +59,7 @@ public class SeatReserved implements Serializable {
         this.seat = seat;
     }
 
+    @JsonbTransient
     public Ticket getTicket() {
         return ticket;
     }
@@ -74,6 +68,7 @@ public class SeatReserved implements Serializable {
         this.ticket = ticket;
     }
 
+    @JsonbTransient
     public Screening getScreening() {
         return screening;
     }
