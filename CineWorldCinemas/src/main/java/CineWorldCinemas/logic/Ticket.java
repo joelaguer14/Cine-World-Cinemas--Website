@@ -23,9 +23,9 @@ public class Ticket implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne()
-    @JoinColumn(name = "id_screening", nullable = false)
-    private Screening screening;
+//    @ManyToOne()
+//    @JoinColumn(name = "id_screening", nullable = false)
+//    private Screening screening;
     
 
     @ManyToOne()
@@ -44,7 +44,7 @@ public class Ticket implements Serializable {
     }
 
     public Ticket(Screening screening, User user, float totalPrice) {
-        this.screening = screening;
+//        this.screening = screening;
         this.user = user;
         this.totalPrice = totalPrice;
         this.seatsReservedList = new ArrayList<>();
@@ -58,14 +58,14 @@ public class Ticket implements Serializable {
         this.id = id;
     }
 
-    @JsonbTransient
-    public Screening getScreening() {
-        return screening;
-    }
+//    @JsonbTransient
+//    public Screening getScreening() {
+//        return screening;
+//    }
 
-    public void setScreening(Screening screening) {
-        this.screening = screening;
-    }
+//    public void setScreening(Screening screening) {
+//        this.screening = screening;
+//    }
 
     @JsonbTransient
     public User getUser() {
@@ -94,6 +94,6 @@ public class Ticket implements Serializable {
 
     @Override
     public String toString() {
-        return "Ticket{" + "id=" + id + ", screening=" + screening + ", user=" + user + ", totalPrice=" + totalPrice + ", seatsReservedList=" + seatsReservedList + '}';
+        return "Ticket{" + "id=" + id + ", user=" + user + ", totalPrice=" + totalPrice + ", seatsReservedList=" + seatsReservedList + '}';
     }
 }

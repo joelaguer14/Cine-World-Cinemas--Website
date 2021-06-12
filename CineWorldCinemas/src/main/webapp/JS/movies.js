@@ -1,13 +1,11 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 var cont = 0;
 
 var url = "http://localhost:8080/CineWorldCinemas/";
 
 var movies = new Array();
+
+var screnning = {};
+var movie = {};
 
 function carouselContentDisplay(carouselContent, movie) {
     var indicator = $("#indicators");
@@ -22,20 +20,21 @@ function carouselContentDisplay(carouselContent, movie) {
             );
     if ($("#indicators").is(':empty')) {
         indicator.append("<button type='button' data-bs-target='#myCarousel' data-bs-slide-to='" + cont + "' class='active' aria-current='true' aria-label='Slide " + cont + "'></button>");
-        console.log(cont);
     } else {
         indicator.append("<button type='button' data-bs-target='#myCarousel' data-bs-slide-to='" + cont + "' aria-label='Slide " + cont + "'></button>");
         $("#" + movie.id).removeClass("active");
-        console.log(cont);
     }
     cont++;
 }
 
 function rowContentDisplay(rowContent, movie) {
     let screeningsTxt = "";
-    movie.screeningsList.forEach((s) => screeningsTxt += "<a href=# class='screening-link'>" + s.screeningStart.split("T")[0] +
-                ", " + s.screeningStart.split("T")[1].split("Z")[0] + ", Auditorium: " + s.auditorium.name + "</a>");
-    console.log(movie.screeningsList);
+    movie.screeningsList.forEach((s) => {
+        screeningsTxt += "<a id='ticket-link-" + s.id + "' data-bs-toggle='modal' data-bs-target='#ticket-modal' class='screening-link'>" + s.screeningStart.split("T")[0] +
+                ", " + s.screeningStart.split("T")[1].split("Z")[0] + ", Auditorium: " + s.auditorium.name + "</a>";
+    });
+
+
 
     rowContent.append(
             "<div class='col'>" +
@@ -59,6 +58,11 @@ function listMovies() {
     movies.forEach((movie) => {
         carouselContentDisplay(carouselContent, movie);
         rowContentDisplay(rowContent, movie);
+        movie.screeningsList.forEach((s) => {
+            $('#ticket-link-' + s.id).click(function () {
+                editScreening(s.id);
+            });
+        });
     });
 }
 
@@ -71,17 +75,13 @@ function fetchAndList() {
             return;
         }
         movies = await response.json();
-        //console.log(movies);
         movies = movies.filter((m) => m.screeningsList.length > 0);
-        //console.log(movies);
         listMovies();
     })();
 }
 
 //=========================================================================================================================================================================
 var movie = {title: "", description: "", duration: 0, price: 0};
-
-var url = "http://localhost:8080/CineWorldCinemas/";
 
 function reset() {
     movie = {title: "", description: "", duration: 0, price: 0};
@@ -145,6 +145,36 @@ function render() {
 function loaded() {
     fetchAndList();
     $("#register-movie-button").click(add);
+
+
 }
+
+//Ticket Modal
+function editScreening(id) {
+    let request = new Request(url + 'api/movies/screening/' + id, {method: 'GET', headers: {}});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
+        screening = await response.json();
+        renderScreening();
+    })();
+}
+
+function renderScreening() {
+   
+    if($("#ticket-title").children().length > 0){
+        $("#h6-screening-title").remove();
+    }
+    $("#ticket-title").prepend(
+     '<h6 id="h6-screening-title" class="modal-title fs-5">'+ screening.screeningStart.split("T")[0] +","+screening.screeningStart.split("T")[1].split("Z")[0] + ", Auditorium: " + screening.auditorium.name+'</h6>'     
+    );
+}
+function loadTicket() {
+
+}
+
 
 $(loaded);

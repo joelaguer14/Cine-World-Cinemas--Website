@@ -6,6 +6,7 @@
 package CineWorldCinemas.presentation;
 
 import CineWorldCinemas.logic.Movie;
+import CineWorldCinemas.logic.Screening;
 import CineWorldCinemas.logic.Service;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -22,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import javax.enterprise.inject.Model;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.NotAcceptableException;
@@ -55,7 +57,19 @@ public class Movies {
             throw new NotAcceptableException(ex);
         }
     }
-
+    
+    @GET
+    @Path("screening/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Screening getScreening(@PathParam("id") int id) {
+        try {
+            return Service.instance().findScreeningById(id);
+        } catch (Exception ex) {
+            throw new NotFoundException(); 
+        }
+    }
+    
+    
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
