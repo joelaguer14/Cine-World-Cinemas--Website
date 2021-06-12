@@ -5,7 +5,7 @@ var url = "http://localhost:8080/CineWorldCinemas/";
 var movies = new Array();
 
 var screnning = {};
-var movie = {};
+var movieMatched = {};
 
 function carouselContentDisplay(carouselContent, movie) {
     var indicator = $("#indicators");
@@ -60,7 +60,7 @@ function listMovies() {
         rowContentDisplay(rowContent, movie);
         movie.screeningsList.forEach((s) => {
             $('#ticket-link-' + s.id).click(function () {
-                editScreening(s.id);
+                renderTicketModal(s.id);
             });
         });
     });
@@ -81,10 +81,9 @@ function fetchAndList() {
 }
 
 //=========================================================================================================================================================================
-var movie = {title: "", description: "", duration: 0, price: 0};
 
 function reset() {
-    movie = {title: "", description: "", duration: 0, price: 0};
+    movieEntries = {title: "", description: "", duration: 0, price: 0};
 }
 
 function validate() {
@@ -100,14 +99,14 @@ function validate() {
 }
 
 function load() {
-    movie = Object.fromEntries((new FormData($("#register-movie-form").get(0))).entries());
+    movieEntries = Object.fromEntries((new FormData($("#register-movie-form").get(0))).entries());
 }
 
 function addImage() {
     var imageData = new FormData();
-    imageData.append("title", movie.title);
+    imageData.append("title", movieEntries.title);
     imageData.append("image", $("#register-movie-image").get(0).files[0]);
-    let request = new Request(url + 'api/movies/' + movie.title + "/image", {method: 'POST', body: imageData});
+    let request = new Request(url + 'api/movies/' + movieEntries.title + "/image", {method: 'POST', body: imageData});
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
@@ -150,8 +149,9 @@ function loaded() {
 }
 
 //Ticket Modal
-function editScreening(id) {
+function renderTicketModal(id) {
     let request = new Request(url + 'api/movies/screening/' + id, {method: 'GET', headers: {}});
+    let requestMovie = new Request(url + 'api/movies', {method: 'GET', headers: {}});
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
@@ -159,18 +159,40 @@ function editScreening(id) {
             return;
         }
         screening = await response.json();
+        const responseMovie = await fetch(requestMovie);
+        if (!responseMovie.ok) {
+            errorMessage(responseMovie.status, $("#buscarDiv #errorDiv"));
+            return;
+        }
+        movies = await responseMovie.json();
+        console.log(movies);
         renderScreening();
     })();
 }
 
 function renderScreening() {
-   
-    if($("#ticket-title").children().length > 0){
+    movies.forEach((m) => {
+        m.screeningsList.forEach((s) => {
+            if (s.id === screening.id) {
+                movieMatched = m;
+            }
+        });
+    });
+
+    if ($("#ticket-title").children().length > 0) {
         $("#h6-screening-title").remove();
     }
+    if ($("#ticket-modal-body").children().length > 0) {
+        $("#ticket-modal-body-child").remove();
+    }
+    
     $("#ticket-title").prepend(
-     '<h6 id="h6-screening-title" class="modal-title fs-5">'+ screening.screeningStart.split("T")[0] +","+screening.screeningStart.split("T")[1].split("Z")[0] + ", Auditorium: " + screening.auditorium.name+'</h6>'     
-    );
+            '<h6 id="h6-screening-title" class="modal-title fs-5">' + movieMatched.title + " - " +
+            screening.screeningStart.split("T")[0] + "," + screening.screeningStart.split("T")[1].split("Z")[0] +
+            ", Auditorium: " + screening.auditorium.name + '</h6>');
+    $("#ticket-modal-body").append("<div id='ticket-modal-body-child'></div>")
+    $("#ticket-modal-body-child").append("<div class = 'd-block' id='image-ticket-modal-div'><img class='image-grid"+
+    " d-block w-100'  src='" + url + "api/movies/" + movieMatched.title + "/image' alt='' id='image-ticket-modal'></div>");
 }
 function loadTicket() {
 
