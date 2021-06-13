@@ -235,3 +235,76 @@ input.invalid {box-shadow: 0 0 1px 1px red;}
     font-weight: bold;
     color: #212529;
 }
+
+/*Seats*/
+.seat {
+    background-color: #444451;
+    height: 12px;
+    width: 15px;
+    margin: 3px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.seat.selected {
+    background-color: #6feaf6;
+}
+
+.seat.occupied {
+    background-color: #fff;
+}
+.seat:not(.occupied):hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.showcase .seat:not(.occupied):hover {
+    cursor: default;
+    transform: scale(1);
+}
+
+.showcase {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #777;
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.showcase li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.showcase li small {
+    margin-left: 2px;
+}
+#ticket-modal-body-child-seats {
+    border: solid 1px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 1rem;
+}
+.screen {
+    background-color:rgba(0, 0, 0, 0.1);
+    height: 70px;
+    width: 50%;
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+    position: relative;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+.row-seat{
+    text-align:center;
+    margin:0 auto;
+    width: fit-content;
+}
+
+.row-seat .col-md-3{
+   display:inline-block;
+   vertical-align: middle;
+   float: none;
+}

@@ -184,15 +184,58 @@ function renderScreening() {
     }
     if ($("#ticket-modal-body").children().length > 0) {
         $("#ticket-modal-body-child").remove();
+        $('#ticket-modal-body-child-seats').remove();
     }
-    
+
+
     $("#ticket-title").prepend(
             '<h6 id="h6-screening-title" class="modal-title fs-5">' + movieMatched.title + " - " +
             screening.screeningStart.split("T")[0] + "," + screening.screeningStart.split("T")[1].split("Z")[0] +
             ", Auditorium: " + screening.auditorium.name + '</h6>');
-    $("#ticket-modal-body").append("<div id='ticket-modal-body-child'></div>")
-    $("#ticket-modal-body-child").append("<div class = 'd-block' id='image-ticket-modal-div'><img class='image-grid"+
-    " d-block w-100'  src='" + url + "api/movies/" + movieMatched.title + "/image' alt='' id='image-ticket-modal'></div>");
+    $("#ticket-modal-body").append("<div id='ticket-modal-body-child'></div>");
+    $("#ticket-modal-body-child").append("<div class = 'd-block' id='image-ticket-modal-div'><img class='image-grid" +
+            " d-block w-100'  src='" + url + "api/movies/" + movieMatched.title + "/image' alt='' id='image-ticket-modal'></div>"
+            + "<p class='text-center'>Price: $" + movieMatched.price + "</p>");
+
+    $('#ticket-modal-body').append("<div id='ticket-modal-body-child-seats'>" +
+            "<p class='text-center'>Seats</p>" +
+            "<ul class='showcase'>" +
+            "<li>" +
+            "<div id='seat' class='seat'></div>" +
+            "<small class='status' style='font-size: 1em;'>N/A</small>" +
+            "</li>" +
+            "<li>" +
+            "<div id='seat' class='seat selected'></div>" +
+            "<small class='status' style='font-size: 1em;'>Selected</small>" +
+            "</li>" +
+            "<li>" +
+            "<div id='seat' class='seat occupied'></div>" +
+            "<small class='status' style='font-size: 1em;'>Occupied</small>" +
+            "</li>" +
+            "</ul>" +
+            "<div class='container-fluid text-center'>" +
+            "<div class='screen'></div>" +
+            mapSeats() +
+            "</div>" +
+            "</div>");
+
+}
+function mapSeats() {
+    var seatsHtml = "";
+    let seatsNumber = screening.auditorium.seatsNumber;
+    let rows = seatsNumber / 5;
+
+    for (let i = 0; i < rows; i++) {
+        seatsHtml += "<div class='row row-seat'>" +
+                "<div id='seat' class='seat col-md-3'></div>" +
+                "<div id='seat' class='seat col-md-3'></div>" +
+                "<div id='seat' class='seat col-md-3'></div>" +
+                "<div id='seat' class='seat col-md-3'></div>" +
+                "<div id='seat' class='seat col-md-3'></div>" +
+                "</div>";
+    }
+
+    return seatsHtml;
 }
 function loadTicket() {
 
