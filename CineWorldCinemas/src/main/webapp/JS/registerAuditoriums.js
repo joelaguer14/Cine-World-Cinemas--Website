@@ -8,6 +8,8 @@ var auditorium = {name: "", seatsNumber: 0};
 
 var url = "http://localhost:8080/CineWorldCinemas/";
 
+
+
 function reset() {
     auditorium = {name: "", seatsNumber: 0};
 }
@@ -26,10 +28,12 @@ function validate() {
 
 function load() {
     auditorium = Object.fromEntries((new FormData($("#register-auditorium-form").get(0))).entries());
+
 }
 
 function add() {
     load();
+    console.log(auditorium);
     if (!validate()) {
         return;
     }

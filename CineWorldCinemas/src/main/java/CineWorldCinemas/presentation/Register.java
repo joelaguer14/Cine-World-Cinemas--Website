@@ -8,6 +8,7 @@ package CineWorldCinemas.presentation;
 import CineWorldCinemas.logic.Auditorium;
 import CineWorldCinemas.logic.Movie;
 import CineWorldCinemas.logic.Screening;
+import CineWorldCinemas.logic.Seat;
 import CineWorldCinemas.logic.Service;
 import CineWorldCinemas.logic.User;
 import javax.ws.rs.Consumes;
@@ -26,13 +27,21 @@ public class Register {
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerUser(User user) throws Exception {
         Service.instance().saveUser(user);
+
     }
 
     @POST
     @Path("auditorium")
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerAuditorium(Auditorium auditorium) throws Exception {
-        Service.instance().saveAuditorium(auditorium);
+        Auditorium auditoriumDB = Service.instance().saveAuditorium(auditorium);
+        int rows = auditorium.getSeatsNumber() / 10;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < 10; j++) {
+                Seat seat = new Seat(i, j, auditoriumDB);
+                Service.instance().saveSeat(seat);
+            }
+        }
     }
 
     @POST
@@ -48,4 +57,5 @@ public class Register {
     public void registerScreening(Screening screening) throws Exception {
         Service.instance().saveScreening(screening);
     }
+
 }

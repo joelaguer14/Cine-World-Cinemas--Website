@@ -121,7 +121,7 @@ function add() {
     if (!validate()) {
         return;
     }
-    let request = new Request(url + 'api/movies/register', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(movie)});
+    let request = new Request(url + 'api/movies/register', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(movieEntries)});
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
@@ -144,10 +144,7 @@ function render() {
 function loaded() {
     fetchAndList();
     $("#register-movie-button").click(add);
-
-
 }
-
 //Ticket Modal
 function renderTicketModal(id) {
     let request = new Request(url + 'api/movies/screening/' + id, {method: 'GET', headers: {}});
@@ -218,15 +215,21 @@ function renderScreening() {
             mapSeats() +
             "</div>" +
             "</div>");
+        console.log(screening);
 
 }
 function mapSeats() {
     var seatsHtml = "";
     let seatsNumber = screening.auditorium.seatsNumber;
-    let rows = seatsNumber / 5;
+    let rows = seatsNumber / 10;
 
     for (let i = 0; i < rows; i++) {
         seatsHtml += "<div class='row row-seat'>" +
+                "<div id='seat' class='seat col-md-3'></div>" +
+                "<div id='seat' class='seat col-md-3'></div>" +
+                "<div id='seat' class='seat col-md-3'></div>" +
+                "<div id='seat' class='seat col-md-3'></div>" +
+                "<div id='seat' class='seat col-md-3'></div>" +
                 "<div id='seat' class='seat col-md-3'></div>" +
                 "<div id='seat' class='seat col-md-3'></div>" +
                 "<div id='seat' class='seat col-md-3'></div>" +
