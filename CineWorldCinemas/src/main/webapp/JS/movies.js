@@ -1,9 +1,6 @@
 var cont = 0;
-
 var url = "http://localhost:8080/CineWorldCinemas/";
-
 var movies = new Array();
-
 var screnning = {};
 var movieMatched = {};
 
@@ -33,9 +30,6 @@ function rowContentDisplay(rowContent, movie) {
         screeningsTxt += "<a id='ticket-link-" + s.id + "' data-bs-toggle='modal' data-bs-target='#ticket-modal' class='screening-link'>" + s.screeningStart.split("T")[0] +
                 ", " + s.screeningStart.split("T")[1].split("Z")[0] + ", Auditorium: " + s.auditorium.name + "</a>";
     });
-
-
-
     rowContent.append(
             "<div class='col'>" +
             "<div class='card my-card'>" +
@@ -141,10 +135,6 @@ function render() {
     $("#register-movie-description").val("");
 }
 
-function loaded() {
-    fetchAndList();
-    $("#register-movie-button").click(add);
-}
 //Ticket Modal
 function renderTicketModal(id) {
     let request = new Request(url + 'api/movies/screening/' + id, {method: 'GET', headers: {}});
@@ -175,7 +165,6 @@ function renderScreening() {
             }
         });
     });
-
     if ($("#ticket-title").children().length > 0) {
         $("#h6-screening-title").remove();
     }
@@ -193,7 +182,6 @@ function renderScreening() {
     $("#ticket-modal-body-child").append("<div class = 'd-block' id='image-ticket-modal-div'><img class='image-grid" +
             " d-block w-100'  src='" + url + "api/movies/" + movieMatched.title + "/image' alt='' id='image-ticket-modal'></div>"
             + "<p class='text-center'>Price: $" + movieMatched.price + "</p>");
-
     $('#ticket-modal-body').append("<div id='ticket-modal-body-child-seats'>" +
             "<p class='text-center'>Seats</p>" +
             "<ul class='showcase'>" +
@@ -214,15 +202,20 @@ function renderScreening() {
             "<div class='screen'></div>" +
             mapSeats() +
             "</div>" +
-            "</div>");
-        console.log(screening);
-
+            "</div>" +
+            "<p class='text text-center' style='font-size: 1em; margin:0px 0px 15px 0px'>" +
+            "You have selected <span id='count'> 0 </span> seats for a price of $" +
+            "<span id='total'> 0 </span>" +
+            "</p>");
+    
+    calculateTotal(movieMatched.price);
 }
+
 function mapSeats() {
     var seatsHtml = "";
     let seatsNumber = screening.auditorium.seatsNumber;
+    console.log(screening.auditorium);
     let rows = seatsNumber / 10;
-
     for (let i = 0; i < rows; i++) {
         seatsHtml += "<div class='row row-seat'>" +
                 "<div id='seat' class='seat col-md-3'></div>" +
@@ -237,12 +230,31 @@ function mapSeats() {
                 "<div id='seat' class='seat col-md-3'></div>" +
                 "</div>";
     }
-
     return seatsHtml;
 }
-function loadTicket() {
 
+function calculateTotal(price) {
+    var count = 0;
+    var seats = document.getElementsByClassName("seat");
+    for (var i = 0; i < seats.length; i++) {
+        var item = seats[i];
+        item.addEventListener("click", (event) => {
+            if (!event.target.classList.contains('occupied') && !event.target.classList.contains('selected')) {
+                count++;
+                console.log(count);
+                var total = count * price;
+                event.target.classList.add("selected");
+                document.getElementById("count").innerText = count;
+                document.getElementById("total").innerText = total;
+
+            }
+        });
+    }
 }
 
+function loaded() {
+    fetchAndList();
+    $("#register-movie-button").click(add);
+}
 
 $(loaded);
