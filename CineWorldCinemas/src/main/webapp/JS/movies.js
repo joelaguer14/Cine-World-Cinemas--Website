@@ -5,6 +5,7 @@ var screnning = {};
 var movieMatched = {};
 var ticket = {};
 var totalPrice = 0;
+var selectedSeats =  new Array();
 
 function carouselContentDisplay(carouselContent, movie) {
     var indicator = $("#indicators");
@@ -278,10 +279,23 @@ function loadTicket(){
     ticket.user = user;
     ticket.screening = screening;
     ticket.totalPrice = totalPrice;
+    ticket.seatsReservedList = selectedSeats;
 }
+function creatReservedSeats(){
+    let selected = $('.selected');
+    
+    selected.forEach((s)=>{
+        
+    }
+            );
+    
+    
+}
+
 function resetTicket(){
     //resetea los valores del ticket
     totalPrice = 0;
+    selectedSeats = [];
 }
 //function validateTicket(){
 //    //valida si hay asientos seleccionados

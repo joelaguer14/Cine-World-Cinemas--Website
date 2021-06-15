@@ -26,11 +26,11 @@ public class SeatReserved implements Serializable {
     private Seat seat;
 
     @ManyToOne()
-    @JoinColumn(name = "id_ticket", nullable = false)
+    @JoinColumn(name = "id_ticket", nullable = true)
     private Ticket ticket;
     
     @ManyToOne()
-    @JoinColumn(name = "id_screening", nullable = false)
+    @JoinColumn(name = "id_screening", nullable = true)
     private Screening screening;
     
     @Column(name = "screening_int")
