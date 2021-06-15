@@ -39,21 +39,21 @@ public class Screening implements Serializable {
     @OneToMany(mappedBy = "screening")
     private List<SeatReserved> seatsReservedList;
 
-//    @OneToMany(mappedBy = "screening")
-//    private List<Ticket> ticketsList;
+    @OneToMany(mappedBy = "screening")
+    private List<Ticket> ticketsList;
 
     public Screening() {
         this.auditorium = new Auditorium();
         this.movie = new Movie();
         this.seatsReservedList = new ArrayList<>();
-//        this.ticketsList = new ArrayList<>();
+        this.ticketsList = new ArrayList<>();
     }
 
     public Screening(Movie movie, Date screeningStart) {
         this.movie = movie;
         this.screeningStart = screeningStart;
         this.seatsReservedList = new ArrayList<>();
-//        this.ticketsList = new ArrayList<>();
+        this.ticketsList = new ArrayList<>();
     }
 
     public int getId() {
@@ -99,13 +99,13 @@ public class Screening implements Serializable {
         this.seatsReservedList = seatsReservedList;
     }
 
-//    public List<Ticket> getTicketsList() {
-//        return ticketsList;
-//    }
-//
-//    public void setTicketsList(List<Ticket> ticketsList) {
-//        this.ticketsList = ticketsList;
-//    }
+    public List<Ticket> getTicketsList() {
+        return ticketsList;
+    }
+
+    public void setTicketsList(List<Ticket> ticketsList) {
+        this.ticketsList = ticketsList;
+    }
 
     @Override
     public String toString() {

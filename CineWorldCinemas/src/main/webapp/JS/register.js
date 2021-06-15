@@ -43,7 +43,6 @@ function load() {
 
 function add() {
     load();
-    console.log(user);
     if (!validate()) {
         console.log("validate");
         return;

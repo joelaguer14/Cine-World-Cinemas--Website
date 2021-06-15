@@ -170,7 +170,11 @@ function renderScreening() {
     }
     if ($("#ticket-modal-body").children().length > 0) {
         $("#ticket-modal-body-child").remove();
-        $('#ticket-modal-body-child-seats').remove();
+        $("#ticket-modal-body-child-seats").remove();
+        $("#modal-ticket-price").remove();
+    }
+    if ($("#modal-ticket-price").children().length > 0) {
+        $("#p-modal-price").remove();
     }
 
 
@@ -203,33 +207,30 @@ function renderScreening() {
             mapSeats() +
             "</div>" +
             "</div>" +
-            "<p class='text text-center' style='font-size: 1em; margin:0px 0px 15px 0px'>" +
+            "<div id='modal-ticket-price'>" +
+            "<p id='p-modal-price' class='text text-center' style='font-size: 1em; margin:0px 0px 15px 0px'>" +
             "You have selected <span id='count'> 0 </span> seats for a price of $" +
             "<span id='total'> 0 </span>" +
-            "</p>");
-    
+            "</p>" +
+            "</div>");
+
+
     calculateTotal(movieMatched.price);
 }
 
 function mapSeats() {
     var seatsHtml = "";
     let seatsNumber = screening.auditorium.seatsNumber;
-    console.log(screening.auditorium);
-    let rows = seatsNumber / 10;
+    let rows = seatsNumber/10;
+    console.log(rows);
     for (let i = 0; i < rows; i++) {
-        seatsHtml += "<div class='row row-seat'>" +
-                "<div id='seat' class='seat col-md-3'></div>" +
-                "<div id='seat' class='seat col-md-3'></div>" +
-                "<div id='seat' class='seat col-md-3'></div>" +
-                "<div id='seat' class='seat col-md-3'></div>" +
-                "<div id='seat' class='seat col-md-3'></div>" +
-                "<div id='seat' class='seat col-md-3'></div>" +
-                "<div id='seat' class='seat col-md-3'></div>" +
-                "<div id='seat' class='seat col-md-3'></div>" +
-                "<div id='seat' class='seat col-md-3'></div>" +
-                "<div id='seat' class='seat col-md-3'></div>" +
-                "</div>";
+         seatsHtml += "<div class='row row-seat'>";
+        for (let j = 0; j < 10; j++) {         
+          seatsHtml += "<div id='seat" +screening.auditorium.seatsList[i*10+j].id+"' class='seat col-md-3'></div>";                    
+        }
+        seatsHtml += "</div>";
     }
+
     return seatsHtml;
 }
 
@@ -250,6 +251,25 @@ function calculateTotal(price) {
             }
         });
     }
+}
+
+function addTicket() {
+    loadTicket();
+    if (!validate()) {
+        console.log("validate");
+        return;
+    }
+    let request = new Request(url + 'api/register', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(user)});
+    (async () => {
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#register-modal #error"));
+            return;
+        }
+        reset();
+        $('#register-modal').modal('hide');
+    })();
+
 }
 
 function loaded() {
