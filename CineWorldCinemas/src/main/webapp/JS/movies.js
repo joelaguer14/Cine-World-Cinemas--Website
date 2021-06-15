@@ -3,6 +3,8 @@ var url = "http://localhost:8080/CineWorldCinemas/";
 var movies = new Array();
 var screnning = {};
 var movieMatched = {};
+var ticket = {};
+var totalPrice = 0;
 
 function carouselContentDisplay(carouselContent, movie) {
     var indicator = $("#indicators");
@@ -214,15 +216,13 @@ function renderScreening() {
             "</p>" +
             "</div>");
 
-
     calculateTotal(movieMatched.price);
 }
 
 function mapSeats() {
     var seatsHtml = "";
     let seatsNumber = screening.auditorium.seatsNumber;
-    let rows = seatsNumber/10;
-    console.log(rows);
+    let rows = seatsNumber/10;    
     for (let i = 0; i < rows; i++) {
          seatsHtml += "<div class='row row-seat'>";
         for (let j = 0; j < 10; j++) {         
@@ -241,40 +241,55 @@ function calculateTotal(price) {
         var item = seats[i];
         item.addEventListener("click", (event) => {
             if (!event.target.classList.contains('occupied') && !event.target.classList.contains('selected')) {
-                count++;
-                console.log(count);
+                count++;                
                 var total = count * price;
                 event.target.classList.add("selected");
                 document.getElementById("count").innerText = count;
                 document.getElementById("total").innerText = total;
-
+                totalPrice = total;
             }
         });
     }
 }
 
 function addTicket() {
+    console.log("addTicket");
     loadTicket();
-    if (!validate()) {
-        console.log("validate");
-        return;
-    }
-    let request = new Request(url + 'api/register', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(user)});
+    console.log(ticket);
+//    if (!validateTicket()) {
+//        console.log("validate");
+//        return;
+//    }
+    let request = new Request(url + 'api/register/ticket', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(ticket)});
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
             errorMessage(response.status, $("#register-modal #error"));
             return;
         }
-        reset();
-        $('#register-modal').modal('hide');
+        resetTicket();
+        $('#ticket-modal').modal('hide');
     })();
-
 }
-
+function loadTicket(){
+    let userJSON = sessionStorage.getItem("user");
+    let user = JSON.parse(userJSON);
+    
+    ticket.user = user;
+    ticket.screening = screening;
+    ticket.totalPrice = totalPrice;
+}
+function resetTicket(){
+    //resetea los valores del ticket
+    totalPrice = 0;
+}
+//function validateTicket(){
+//    //valida si hay asientos seleccionados
+//}
 function loaded() {
     fetchAndList();
     $("#register-movie-button").click(add);
+    $("#purchase-ticket-button").click(addTicket);
 }
 
 $(loaded);

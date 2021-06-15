@@ -10,6 +10,7 @@ import CineWorldCinemas.logic.Movie;
 import CineWorldCinemas.logic.Screening;
 import CineWorldCinemas.logic.Seat;
 import CineWorldCinemas.logic.Service;
+import CineWorldCinemas.logic.Ticket;
 import CineWorldCinemas.logic.User;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -56,6 +57,13 @@ public class Register {
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerScreening(Screening screening) throws Exception {
         Service.instance().saveScreening(screening);
+    }
+    
+    @POST
+    @Path("ticket")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void registerTicket(Ticket ticket) throws Exception {
+        Service.instance().saveTicket(ticket);
     }
 
 }
