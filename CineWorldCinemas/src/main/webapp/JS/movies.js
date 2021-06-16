@@ -259,8 +259,7 @@ function calculateTotal(price) {
                 document.getElementById("count").innerText = count;
                 document.getElementById("total").innerText = total;
                 totalPrice = total;
-            }
-            else if(event.target.classList.contains('selected')){
+            } else if (event.target.classList.contains('selected')) {
                 event.target.classList.remove("selected");
                 event.target.classList.remove("selectedSeat");
                 count--;
@@ -312,6 +311,25 @@ function addTicket() {
         }
         resetTicket();
         $('#ticket-modal').modal('hide');
+
+
+
+
+        if (!(sessionStorage.getItem("user"))) {
+            if ($("#payment-modal-body").children().length > 2) {
+                $(".anonymous").remove();
+            }
+            $('#payment-modal-body').append("<div class='form-input mb-3'>" +
+                    "<span><i class='fa fa-user anonymous' aria-hidden='true'></i></span>" +
+                    "<input class='register-input anonymous' id='register-fullname' type='text' name='name' placeholder='Full name' tabindex='10'>" +
+                    "</div>" +
+                    "<div class='form-input mb-3 anonymous'>" +
+                    "<span><i class='fa fa-envelope anonymous' aria-hidden='true'></i></span>" +
+                    "<input class='register-input anonymous' id='register-email' type='email' name='email' placeholder='Email' tabindex='10'>" +
+                    "</div>"
+                    );
+        }
+        $('#payment-modal').modal('show');
     })();
 }
 function loadTicket() {
@@ -339,6 +357,11 @@ function resetTicket() {
     totalPrice = 0;
     selectedSeats = [];
 }
+function createPdf(){
+    var doc = new jsPDF();
+    
+    
+}
 //function validateTicket(){
 //    //valida si hay asientos seleccionados
 //}
@@ -347,5 +370,6 @@ function loaded() {
     $("#register-movie-button").click(add);
     $("#purchase-ticket-button").click(addTicket);
 }
+
 
 $(loaded);

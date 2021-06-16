@@ -22,6 +22,7 @@ and open the template in the editor.
         <script src="/CineWorldCinemas/JS/menu.js"></script>
         <script src="/CineWorldCinemas/JS/login.js"></script>
         <script src="/CineWorldCinemas/JS/footer.js"></script>
+        <script src="dist/jspdf.min.js"></script>
     </head>
     <body>
         <div id="myCarousel" class="carousel slide carouse-fade" data-bs-ride="carousel">
@@ -56,6 +57,32 @@ and open the template in the editor.
                     </div>
                     <div class="text-center mb-3">
                         <button id="purchase-ticket-button" type="button" class="btn btn-primary">
+                            Purchase
+                        </button>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <p class="mt-1 mb-1 text-muted">&copy; 2021 Copyright: Brute Force Technologies</p>
+                    </div>
+                    <div id="error" style="width:80%; margin: auto;"></div> 
+                </div>
+            </div>
+        </div> 
+
+        <!-- Payment modal -->
+        <div class="modal fade" id="payment-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">   
+                    <div class="modal-body" id="payment-modal-body">
+                        <h4 class="title text-center m-4">
+                            Payment
+                        </h4>
+                        <div class="form-input">
+                            <span><i class="fa fa-money" aria-hidden="true"></i></span>
+                            <input type="text" id="payment-card" placeholder="Card number" name="cardNumber" tabindex="10">
+                        </div>
+                    </div>
+                    <div class="text-center mb-3">
+                        <button id="purchase-payment-button" type="button" class="btn btn-primary">
                             Purchase
                         </button>
                     </div>
