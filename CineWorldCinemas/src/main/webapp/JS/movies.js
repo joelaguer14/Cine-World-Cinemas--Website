@@ -156,7 +156,6 @@ function renderTicketModal(id) {
             return;
         }
         movies = await responseMovie.json();
-        console.log(movies);
         renderScreening();
     })();
 }
@@ -225,7 +224,6 @@ function mapSeats() {
     var seatsHtml = "";
     let seatsNumber = screening.auditorium.seatsNumber;
     let rows = seatsNumber / 10;
-    console.log(screening.auditorium);
     for (let i = 0; i < rows; i++) {
         seatsHtml += "<div class='row row-seat'>";
         for (let j = 0; j < 10; j++) {
@@ -273,9 +271,9 @@ function calculateTotal(price) {
 }
 
 function addTicket() {
-    console.log("addTicket");
+    //console.log("addTicket");
     loadTicket();
-    console.log(ticket);
+//    console.log(ticket);
 //    if (!validateTicket()) {
 //        console.log("validate");
 //        return;
@@ -284,13 +282,13 @@ function addTicket() {
     let requestGetTicket = new Request(url + 'api/tickets/last', {method: 'GET', headers: {}});
 
     (async () => {
-        console.log("Before fetch");
+        
         const response = await fetch(request);
         if (!response.ok) {
             errorMessage(response.status, $("#register-modal #error"));
             return;
         }
-        console.log("After fetch");
+        
         //------get Ticket from DB for its id------
         const responseGetTicket = await fetch(requestGetTicket);
         if (!responseGetTicket.ok) {
@@ -330,6 +328,8 @@ function addTicket() {
                     );
         }
         $('#payment-modal').modal('show');
+        console.log(ticket);
+        createPdf(DBTicket.id,ticket);
     })();
 }
 function loadTicket() {
@@ -357,10 +357,13 @@ function resetTicket() {
     totalPrice = 0;
     selectedSeats = [];
 }
-function createPdf(){
+function createPdf(id,ticket){
     var doc = new jsPDF();
-    
-    
+    doc.text(20, 20,'Ticket id: '+id);
+    doc.text(20, 30,'Auditorium: '+ticket.screening.auditorium.name);
+    doc.text(20, 40,'Screening date: '+ticket.screening.screeningStart);
+    doc.text(20, 50,'Price: $'+ticket.totalPrice);
+    doc.save('Ticket'+id+'.pdf');
 }
 //function validateTicket(){
 //    //valida si hay asientos seleccionados
