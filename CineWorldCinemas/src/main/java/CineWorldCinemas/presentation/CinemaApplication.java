@@ -25,6 +25,7 @@ public class CinemaApplication extends Application {
         classes.add(Register.class);
         classes.add(Login.class);
         classes.add(Auditoriums.class);
+        classes.add(Tickets.class);
         return classes;
     }   
 }

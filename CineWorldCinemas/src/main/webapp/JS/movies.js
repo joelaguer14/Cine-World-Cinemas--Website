@@ -5,7 +5,8 @@ var screnning = {};
 var movieMatched = {};
 var ticket = {};
 var totalPrice = 0;
-var selectedSeats =  new Array();
+var selectedSeats = new Array();
+var DBTicket;
 
 function carouselContentDisplay(carouselContent, movie) {
     var indicator = $("#indicators");
@@ -118,7 +119,7 @@ function add() {
     if (!validate()) {
         return;
     }
-    let request = new Request(url + 'api/movies/register', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(movieEntries)});
+    let request = new Request(url + 'api/register/movie', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(movieEntries)});
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
@@ -223,11 +224,11 @@ function renderScreening() {
 function mapSeats() {
     var seatsHtml = "";
     let seatsNumber = screening.auditorium.seatsNumber;
-    let rows = seatsNumber/10;    
+    let rows = seatsNumber / 10;
     for (let i = 0; i < rows; i++) {
-         seatsHtml += "<div class='row row-seat'>";
-        for (let j = 0; j < 10; j++) {         
-          seatsHtml += "<div id='seat" +screening.auditorium.seatsList[i*10+j].id+"' class='seat col-md-3'></div>";                    
+        seatsHtml += "<div class='row row-seat'>";
+        for (let j = 0; j < 10; j++) {
+            seatsHtml += "<div id='seat" + screening.auditorium.seatsList[i * 10 + j].id + "' class='seat col-md-3'></div>";
         }
         seatsHtml += "</div>";
     }
@@ -242,9 +243,10 @@ function calculateTotal(price) {
         var item = seats[i];
         item.addEventListener("click", (event) => {
             if (!event.target.classList.contains('occupied') && !event.target.classList.contains('selected')) {
-                count++;                
+                count++;
                 var total = count * price;
                 event.target.classList.add("selected");
+                event.target.classList.add("selectedSeat");
                 document.getElementById("count").innerText = count;
                 document.getElementById("total").innerText = total;
                 totalPrice = total;
@@ -262,37 +264,59 @@ function addTicket() {
 //        return;
 //    }
     let request = new Request(url + 'api/register/ticket', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(ticket)});
+    let requestGetTicket = new Request(url + 'api/tickets/last', {method: 'GET', headers: {}});
+
     (async () => {
+        console.log("Before fetch");
         const response = await fetch(request);
         if (!response.ok) {
             errorMessage(response.status, $("#register-modal #error"));
             return;
         }
+        console.log("After fetch");
+        //------get Ticket from DB for its id------
+        const responseGetTicket = await fetch(requestGetTicket);
+        if (!responseGetTicket.ok) {
+            errorMessage(responseGetTicket.status, $("#register-modal #error"));
+            return;
+        }
+        DBTicket = await responseGetTicket.json();
+
+        //------- POST each seatReserved with its ticket-----
+        createReservedSeats();
+        for (const seatR of selectedSeats) {
+            let requestPostSeat = new Request(url + 'api/register/seatReserved', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(seatR)});
+            const responsePostSeat = await fetch(requestPostSeat);
+            if (!responsePostSeat.ok) {
+                errorMessage(responsePostSeat.status, $("#register-modal #error"));
+                return;
+            }
+        }
         resetTicket();
         $('#ticket-modal').modal('hide');
     })();
 }
-function loadTicket(){
+function loadTicket() {
     let userJSON = sessionStorage.getItem("user");
     let user = JSON.parse(userJSON);
-    
+
     ticket.user = user;
     ticket.screening = screening;
     ticket.totalPrice = totalPrice;
-    ticket.seatsReservedList = selectedSeats;
-}
-function creatReservedSeats(){
-    let selected = $('.selected');
-    
-    selected.forEach((s)=>{
-        
-    }
-            );
-    
-    
 }
 
-function resetTicket(){
+function createReservedSeats() {
+    
+    $('.selectedSeat').each(function () {
+        selectedSeats.push({seat: {id: $(this).attr('id')}, screeningId: screening.id, ticket: DBTicket});
+    });
+
+    for (const sel of selectedSeats) {
+        sel.seat.id = sel.seat.id.split("t")[1];
+    }
+}
+
+function resetTicket() {
     //resetea los valores del ticket
     totalPrice = 0;
     selectedSeats = [];

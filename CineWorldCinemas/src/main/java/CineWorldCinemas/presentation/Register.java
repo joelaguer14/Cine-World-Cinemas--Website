@@ -9,6 +9,7 @@ import CineWorldCinemas.logic.Auditorium;
 import CineWorldCinemas.logic.Movie;
 import CineWorldCinemas.logic.Screening;
 import CineWorldCinemas.logic.Seat;
+import CineWorldCinemas.logic.SeatReserved;
 import CineWorldCinemas.logic.Service;
 import CineWorldCinemas.logic.Ticket;
 import CineWorldCinemas.logic.User;
@@ -65,5 +66,11 @@ public class Register {
     public void registerTicket(Ticket ticket) throws Exception {
         Service.instance().saveTicket(ticket);
     }
-
+    
+    @POST
+    @Path("seatReserved")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void registerSeatReserved(SeatReserved seatR) throws Exception {
+        Service.instance().saveSeatReserved(seatR);
+    }
 }

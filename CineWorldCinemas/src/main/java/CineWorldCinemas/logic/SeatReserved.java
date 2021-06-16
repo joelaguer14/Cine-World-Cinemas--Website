@@ -28,18 +28,18 @@ public class SeatReserved implements Serializable {
     @ManyToOne()
     @JoinColumn(name = "id_ticket", nullable = true)
     private Ticket ticket;
-    
+
     @ManyToOne()
     @JoinColumn(name = "id_screening", nullable = true)
     private Screening screening;
-    
+
     @Column(name = "screening_int")
     private int screeningId;
 
     public SeatReserved() {
         seat = new Seat();
         ticket = new Ticket();
-        screening = new Screening();
+        
     }
 
     public SeatReserved(Seat seat, Ticket ticket, Screening screening) {
@@ -47,6 +47,13 @@ public class SeatReserved implements Serializable {
         this.ticket = ticket;
         this.screening = screening;
         this.screeningId = this.screening.getId();
+    }
+
+    public SeatReserved(Seat seat, Ticket ticket, int screeningId) {
+        this.seat = seat;
+        this.ticket = ticket;
+        this.screeningId = screeningId;
+        this.screening = Service.instance().findScreeningById(this.screeningId);
     }
 
     public void setScreeningId(int screeningId) {
