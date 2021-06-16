@@ -225,10 +225,19 @@ function mapSeats() {
     var seatsHtml = "";
     let seatsNumber = screening.auditorium.seatsNumber;
     let rows = seatsNumber / 10;
+    console.log(screening.auditorium);
     for (let i = 0; i < rows; i++) {
         seatsHtml += "<div class='row row-seat'>";
         for (let j = 0; j < 10; j++) {
-            seatsHtml += "<div id='seat" + screening.auditorium.seatsList[i * 10 + j].id + "' class='seat col-md-3'></div>";
+            let occupied = "";
+            let reservedSeats = screening.auditorium.seatsList[i * 10 + j].seatsReserved;
+            reservedSeats.forEach((seat) => {
+                if (seat.screeningId === screening.id) {
+                    occupied = "occupied";
+                }
+            });
+
+            seatsHtml += "<div id='seat" + screening.auditorium.seatsList[i * 10 + j].id + "' class='seat " + occupied + " col-md-3'></div>";
         }
         seatsHtml += "</div>";
     }
@@ -247,6 +256,15 @@ function calculateTotal(price) {
                 var total = count * price;
                 event.target.classList.add("selected");
                 event.target.classList.add("selectedSeat");
+                document.getElementById("count").innerText = count;
+                document.getElementById("total").innerText = total;
+                totalPrice = total;
+            }
+            else if(event.target.classList.contains('selected')){
+                event.target.classList.remove("selected");
+                event.target.classList.remove("selectedSeat");
+                count--;
+                var total = count * price;
                 document.getElementById("count").innerText = count;
                 document.getElementById("total").innerText = total;
                 totalPrice = total;
@@ -306,7 +324,7 @@ function loadTicket() {
 }
 
 function createReservedSeats() {
-    
+
     $('.selectedSeat').each(function () {
         selectedSeats.push({seat: {id: $(this).attr('id')}, screeningId: screening.id, ticket: DBTicket});
     });
