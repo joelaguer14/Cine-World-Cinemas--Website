@@ -7,11 +7,13 @@ package CineWorldCinemas.presentation;
 
 import CineWorldCinemas.logic.Service;
 import CineWorldCinemas.logic.Ticket;
-import java.util.Comparator;
+import CineWorldCinemas.logic.User;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -35,7 +37,7 @@ public class Tickets {
         List<Ticket> ticketsList = Service.instance().findAllTickets().stream().
                 sorted((Ticket a, Ticket b) -> a.getId() - b.getId()).collect(Collectors.toList());
 
-        return ticketsList.get(ticketsList.size()-1);
+        return ticketsList.get(ticketsList.size() - 1);
     }
-    
+
 }

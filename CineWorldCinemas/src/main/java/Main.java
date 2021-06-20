@@ -20,11 +20,13 @@ public class Main {
         Service service = Service.instance();
         try {
             service.saveUser(new User("111", "Niki", "niki@outlook.com", "111", true));
+            service.saveUser(new User("222", "Alonso", "alonso@outlook.com", "222", true));
+            service.saveUser(new User("333", "Joel", "joel@outlook.com", "333", true));
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        System.out.println(service.findAllMovies());
+        System.out.println(service.findAllUsers());
 
     }
 
