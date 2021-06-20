@@ -26,15 +26,17 @@ public class Ticket implements Serializable {
     @ManyToOne()
     @JoinColumn(name = "id_screening", nullable = false)
     private Screening screening;
-    
+
     @ManyToOne()
     @JoinColumn(name = "id_user", nullable = true)
     private User user;
-    
+
     @Column(name = "total_price")
     private float totalPrice;
-    
-  
+
+    @Column(name = "credit_card")
+    private String creditCard;
+
     @OneToMany(mappedBy = "ticket")
     private List<SeatReserved> seatsReservedList;
 
@@ -47,6 +49,14 @@ public class Ticket implements Serializable {
         this.user = user;
         this.totalPrice = totalPrice;
         this.seatsReservedList = new ArrayList<>();
+    }
+
+    public Ticket(Screening screening, User user, float totalPrice, String creditCard) {
+        this.screening = screening;
+        this.user = user;
+        this.totalPrice = totalPrice;
+        this.seatsReservedList = new ArrayList<>();
+        this.creditCard = creditCard;
     }
 
     public int getId() {
@@ -74,7 +84,7 @@ public class Ticket implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-    
+
     public float getTotalPrice() {
         return totalPrice;
     }
@@ -90,6 +100,15 @@ public class Ticket implements Serializable {
     public void setSeatsReservedList(List<SeatReserved> seatsReservedList) {
         this.seatsReservedList = seatsReservedList;
     }
+
+    public String getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(String creditCard) {
+        this.creditCard = creditCard;
+    }
+    
 
     @Override
     public String toString() {

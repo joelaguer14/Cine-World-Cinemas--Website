@@ -7,6 +7,7 @@ var ticket = {};
 var totalPrice = 0;
 var selectedSeats = new Array();
 var DBTicket;
+var contAnonymous = 5;
 
 function carouselContentDisplay(carouselContent, movie) {
     var indicator = $("#indicators");
@@ -271,7 +272,7 @@ function calculateTotal(price) {
 }
 
 function addTicket() {
-    //console.log("addTicket");
+//    console.log("addTicket");
     loadTicket();
 //    console.log(ticket);
 //    if (!validateTicket()) {
@@ -282,13 +283,13 @@ function addTicket() {
     let requestGetTicket = new Request(url + 'api/tickets/last', {method: 'GET', headers: {}});
 
     (async () => {
-        
+
         const response = await fetch(request);
         if (!response.ok) {
             errorMessage(response.status, $("#register-modal #error"));
             return;
         }
-        
+
         //------get Ticket from DB for its id------
         const responseGetTicket = await fetch(requestGetTicket);
         if (!responseGetTicket.ok) {
@@ -311,7 +312,13 @@ function addTicket() {
         $('#ticket-modal').modal('hide');
 
 
-
+        //------get Ticket from DB------
+        const responseGetTicketDB = await fetch(requestGetTicket);
+        if (!responseGetTicketDB.ok) {
+            errorMessage(responseGetTicketDB.status, $("#payment-modal-body #error"));
+            return;
+        }
+        DBTicket = await responseGetTicketDB.json();
 
         if (!(sessionStorage.getItem("user"))) {
             if ($("#payment-modal-body").children().length > 2) {
@@ -319,17 +326,19 @@ function addTicket() {
             }
             $('#payment-modal-body').append("<div class='form-input mb-3'>" +
                     "<span><i class='fa fa-user anonymous' aria-hidden='true'></i></span>" +
-                    "<input class='register-input anonymous' id='register-fullname' type='text' name='name' placeholder='Full name' tabindex='10'>" +
+                    "<input class='register-input anonymous' id='register-fullname-payment' type='text' name='name' placeholder='Full name' tabindex='10'>" +
                     "</div>" +
                     "<div class='form-input mb-3 anonymous'>" +
                     "<span><i class='fa fa-envelope anonymous' aria-hidden='true'></i></span>" +
-                    "<input class='register-input anonymous' id='register-email' type='email' name='email' placeholder='Email' tabindex='10'>" +
+                    "<input class='register-input anonymous' id='register-email-payment' type='email' name='email' placeholder='Email' tabindex='10'>" +
                     "</div>"
                     );
         }
+        $('#payment-modal').prepend("<div class='fs-5'>" +
+                "Total amount: " + DBTicket.totalPrice + "</div>");
         $('#payment-modal').modal('show');
         console.log(ticket);
-        createPdf(DBTicket.id,ticket);
+//        createPdf(DBTicket.id, ticket);
     })();
 }
 function loadTicket() {
@@ -340,6 +349,53 @@ function loadTicket() {
     ticket.screening = screening;
     ticket.totalPrice = totalPrice;
 }
+
+function makePurchase() {
+    DBTicket.creditCard = $("#payment-card").val();
+
+
+
+    let requestGetUser = new Request(url + 'api/users/last', {method: 'GET', headers: {}});
+    (async () => {
+        console.log(DBTicket);
+        if (DBTicket.user == null) {
+            console.log("User null")
+            let user = {id: "" + ++contAnonymous, name: $("#register-fullname-payment").val(), email: $("#register-email-payment").val()};
+            console.log(user);
+            let requestUser = new Request(url + 'api/register', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(user)});
+
+            const responseUser = await fetch(requestUser);
+            if (!responseUser.ok) {
+                errorMessage(responseUser.status, $("#register-modal #error"));
+                return;
+            }
+
+            const responseGetUserDB = await fetch(requestGetUser);
+            if (!responseGetUserDB.ok) {
+                errorMessage(responseGetUserDB.status, $("#payment-modal-body #error"));
+                return;
+            }
+            user = await responseGetUserDB.json();
+            DBTicket.user = user;
+            console.log(user);
+            //DBTicket.user 
+        }
+        let request = new Request(url + 'api/tickets', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(DBTicket)});
+        const response = await fetch(request);
+        if (!response.ok) {
+            errorMessage(response.status, $("#payment-modal #error"));
+            return;
+        }
+        createPdf(DBTicket.id, DBTicket);
+        resetPayment();
+
+    })();
+}
+function resetPayment() {
+    $("#payment-card").val("");
+    DBTicket = {user: {}, creditCard: "", screening: {screeningStart: ""}, totalPrice: 0.0};
+}
+
 
 function createReservedSeats() {
 
@@ -357,13 +413,15 @@ function resetTicket() {
     totalPrice = 0;
     selectedSeats = [];
 }
-function createPdf(id,ticket){
+function createPdf(id, ticket) {
     var doc = new jsPDF();
-    doc.text(20, 20,'Ticket id: '+id);
-    doc.text(20, 30,'Auditorium: '+ticket.screening.auditorium.name);
-    doc.text(20, 40,'Screening date: '+ticket.screening.screeningStart);
-    doc.text(20, 50,'Price: $'+ticket.totalPrice);
-    doc.save('Ticket'+id+'.pdf');
+    doc.text(20, 20, 'Ticket id: ' + id);
+    doc.text(20, 30, 'Auditorium: ' + ticket.screening.auditorium.name);
+    doc.text(20, 40, 'Screening date: ' + ticket.screening.screeningStart);
+    doc.text(20, 50, 'Price: $' + ticket.totalPrice);
+    doc.text(20, 50, 'Credit card number: ' + ticket.creditCard);
+    doc.text(20, 50, 'User name: ' + ticket.user.name);
+    doc.save('Ticket' + id + '.pdf');
 }
 //function validateTicket(){
 //    //valida si hay asientos seleccionados
@@ -372,6 +430,7 @@ function loaded() {
     fetchAndList();
     $("#register-movie-button").click(add);
     $("#purchase-ticket-button").click(addTicket);
+    $("#purchase-payment-button").click(makePurchase);
 }
 
 

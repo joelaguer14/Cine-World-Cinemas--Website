@@ -39,4 +39,13 @@ public class Users {
         }
     }
     
+    @GET
+    @Path("last")
+    @Produces({MediaType.APPLICATION_JSON})
+    public User searchLast() {
+        List<User> usersList = Service.instance().findAllUsers();
+
+        return usersList.get(usersList.size()-1);
+    }
+    
 }

@@ -10,8 +10,10 @@ import CineWorldCinemas.logic.Ticket;
 import CineWorldCinemas.logic.User;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -38,6 +40,16 @@ public class Tickets {
                 sorted((Ticket a, Ticket b) -> a.getId() - b.getId()).collect(Collectors.toList());
 
         return ticketsList.get(ticketsList.size() - 1);
+    }
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void update(Ticket ticket) {  
+        try {
+            Service.instance().updateTicket(ticket);
+        } catch (Exception ex) {
+            throw new NotFoundException(); 
+        }
     }
 
 }
