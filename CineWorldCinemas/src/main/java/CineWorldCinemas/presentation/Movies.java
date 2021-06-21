@@ -23,7 +23,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import javax.enterprise.inject.Model;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.NotAcceptableException;
@@ -42,12 +43,14 @@ public class Movies {
     String location = "C:/CineWorldCinemasImages/";
 
     @GET
+    @PermitAll
     @Produces({MediaType.APPLICATION_JSON})
     public List<Movie> search(@DefaultValue("") @QueryParam("nombre") String nombre) {
         return Service.instance().findMoviesByName(nombre);
     }
 
     @POST
+    @RolesAllowed({"true"})
     @Path("register")
     @Consumes(MediaType.APPLICATION_JSON)
     public void add(Movie movie) {
@@ -57,20 +60,21 @@ public class Movies {
             throw new NotAcceptableException(ex);
         }
     }
-    
+
     @GET
+    @PermitAll
     @Path("screening/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Screening getScreening(@PathParam("id") int id) {
         try {
             return Service.instance().findScreeningById(id);
         } catch (Exception ex) {
-            throw new NotFoundException(); 
+            throw new NotFoundException();
         }
     }
-    
-    
+
     @GET
+    @PermitAll
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Movie get(@PathParam("id") int id) {
@@ -82,6 +86,7 @@ public class Movies {
     }
 
     @PUT
+    @RolesAllowed({"true"})
     @Consumes(MediaType.APPLICATION_JSON)
     public void update(Movie movie) {
         try {
@@ -92,6 +97,7 @@ public class Movies {
     }
 
     @DELETE
+    @RolesAllowed({"true"})
     @Path("{id}")
     public void delete(@PathParam("id") int id) {
         try {
@@ -102,6 +108,7 @@ public class Movies {
     }
 
     @GET
+    @PermitAll
     @Path("{title}/image")
     @Produces("image/jpg")
     public Response getImage(@PathParam("title") String title) throws IOException {
@@ -111,6 +118,7 @@ public class Movies {
     }
 
     @POST
+    @RolesAllowed({"true"})
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Path("{title}/image")
     public void addImage(@PathParam("title") String id, @FormDataParam("image") InputStream imagenStream) {

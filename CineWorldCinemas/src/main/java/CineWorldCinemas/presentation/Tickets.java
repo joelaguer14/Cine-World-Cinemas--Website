@@ -10,6 +10,8 @@ import CineWorldCinemas.logic.Ticket;
 import CineWorldCinemas.logic.User;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
@@ -27,12 +29,14 @@ import javax.ws.rs.core.MediaType;
 public class Tickets {
 
     @GET
+    @PermitAll
     @Produces({MediaType.APPLICATION_JSON})
     public List<Ticket> search() {
         return Service.instance().findAllTickets();
     }
 
     @GET
+    @PermitAll
     @Path("last")
     @Produces({MediaType.APPLICATION_JSON})
     public Ticket searchLast() {
@@ -44,6 +48,7 @@ public class Tickets {
 
     @PUT
     @Path("creditCard")
+    @RolesAllowed({"true"})
     @Consumes(MediaType.APPLICATION_JSON)
     public void update(Ticket ticket) {  
         try {

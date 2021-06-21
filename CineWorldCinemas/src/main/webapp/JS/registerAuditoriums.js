@@ -8,8 +8,6 @@ var auditorium = {name: "", seatsNumber: 0};
 
 var url = "http://localhost:8080/CineWorldCinemas/";
 
-
-
 function reset() {
     auditorium = {name: "", seatsNumber: 0};
 }
@@ -52,6 +50,32 @@ function add() {
 function render() {
     $("#register-auditorium-name").val(auditorium.name);
     $("#register-auditorium-seats-quantity").val("");
+}
+
+function errorMessage(status, place) {
+    switch (status) {
+        case 404:
+            error = "User not found";
+            break;
+        case 403:
+        case 405:
+            error = "Unauthorized user";
+            break;
+        case 406:
+        case 405:
+            error = "User already exists";
+            break;
+        default:
+            error = "Error: " + status;
+            break;
+    }
+    ;
+
+    place.html("<div class='alert alert-danger alert-dismissible fade show' role='alert'>" +
+            "<strong>Error!</strong> " + error + " " +
+            "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>" +
+            "</div>");
+    return;
 }
 
 function loaded() {
