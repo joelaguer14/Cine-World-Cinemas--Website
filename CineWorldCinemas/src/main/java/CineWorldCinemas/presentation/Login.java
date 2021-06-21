@@ -7,6 +7,7 @@ package CineWorldCinemas.presentation;
 
 import CineWorldCinemas.logic.Service;
 import CineWorldCinemas.logic.User;
+import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
@@ -24,6 +25,7 @@ import javax.ws.rs.core.MediaType;
  * @author felig
  */
 @Path("/login")
+@PermitAll
 public class Login {
 
     @Context

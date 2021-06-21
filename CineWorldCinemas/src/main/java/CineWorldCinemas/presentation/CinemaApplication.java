@@ -5,6 +5,7 @@
  */
 package CineWorldCinemas.presentation;
 
+import CineWorldCinemas.filter.RestfulFilter;
 import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
@@ -17,6 +18,7 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
  */
 @ApplicationPath("api")
 public class CinemaApplication extends Application {
+
     @Override
     public Set<Class<?>> getClasses() {
         HashSet<Class<?>> classes = new HashSet<>();
@@ -28,7 +30,8 @@ public class CinemaApplication extends Application {
         classes.add(Tickets.class);
         classes.add(Users.class);
         classes.add(Screenings.class);
+        classes.add(RestfulFilter.class);
 
         return classes;
-    }   
+    }
 }

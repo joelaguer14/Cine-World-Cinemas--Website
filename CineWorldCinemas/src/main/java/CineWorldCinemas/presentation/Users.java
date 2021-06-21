@@ -8,6 +8,7 @@ package CineWorldCinemas.presentation;
 import CineWorldCinemas.logic.Service;
 import CineWorldCinemas.logic.User;
 import java.util.List;
+import javax.annotation.security.PermitAll;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
@@ -20,6 +21,7 @@ import javax.ws.rs.core.MediaType;
  * @author alonso
  */
 @Path("/users")
+@PermitAll
 public class Users {
     
     @GET

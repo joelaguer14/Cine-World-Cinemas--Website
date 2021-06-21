@@ -286,14 +286,14 @@ function addTicket() {
 
         const response = await fetch(request);
         if (!response.ok) {
-            errorMessage(response.status, $("#register-modal #error"));
+            errorMessage(response.status, $("#ticket-modal #error"));
             return;
         }
 
         //------get Ticket from DB for its id------
         const responseGetTicket = await fetch(requestGetTicket);
         if (!responseGetTicket.ok) {
-            errorMessage(responseGetTicket.status, $("#register-modal #error"));
+            errorMessage(responseGetTicket.status, $("#ticket-modal #error"));
             return;
         }
         DBTicket = await responseGetTicket.json();
@@ -304,7 +304,7 @@ function addTicket() {
             let requestPostSeat = new Request(url + 'api/register/seatReserved', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(seatR)});
             const responsePostSeat = await fetch(requestPostSeat);
             if (!responsePostSeat.ok) {
-                errorMessage(responsePostSeat.status, $("#register-modal #error"));
+                errorMessage(responsePostSeat.status, $("#ticket-modal #error"));
                 return;
             }
         }
@@ -423,15 +423,43 @@ function createPdf(id, ticket) {
     doc.text(20, 50, 'User name: ' + ticket.user.name);
     doc.save('Ticket' + id + '.pdf');
 }
+
 //function validateTicket(){
 //    //valida si hay asientos seleccionados
 //}
+
+
+function errorMessage(status, place) {
+    switch (status) {
+        case 404:
+            error = "User not found";
+            break;
+        case 403:
+        case 405:
+            error = "Unauthorized user";
+            break;
+        case 406:
+        case 405:
+            error = "User already exists";
+            break;
+        default:
+            error = "Error: " + status;
+            break;
+    }
+    ;
+
+    place.html("<div class='alert alert-danger alert-dismissible fade show' role='alert'>" +
+            "<strong>Error!</strong> " + error + " " +
+            "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>" +
+            "</div>");
+    return;
+}
+
 function loaded() {
     fetchAndList();
     $("#register-movie-button").click(add);
     $("#purchase-ticket-button").click(addTicket);
     $("#purchase-payment-button").click(makePurchase);
 }
-
 
 $(loaded);

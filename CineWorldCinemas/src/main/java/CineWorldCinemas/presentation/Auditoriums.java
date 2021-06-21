@@ -6,10 +6,8 @@
 package CineWorldCinemas.presentation;
 
 import CineWorldCinemas.logic.Auditorium;
-import CineWorldCinemas.logic.Movie;
 import CineWorldCinemas.logic.Service;
 import java.util.List;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -21,6 +19,7 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("/auditoriums")
 public class Auditoriums {
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public List<Auditorium> findAll() {

@@ -13,6 +13,8 @@ import CineWorldCinemas.logic.SeatReserved;
 import CineWorldCinemas.logic.Service;
 import CineWorldCinemas.logic.Ticket;
 import CineWorldCinemas.logic.User;
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -26,6 +28,7 @@ import javax.ws.rs.core.MediaType;
 public class Register {
 
     @POST
+    @PermitAll
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerUser(User user) throws Exception {
         Service.instance().saveUser(user);
@@ -33,6 +36,7 @@ public class Register {
     }
 
     @POST
+    @RolesAllowed({"true"})
     @Path("auditorium")
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerAuditorium(Auditorium auditorium) throws Exception {
@@ -47,6 +51,7 @@ public class Register {
     }
 
     @POST
+    @RolesAllowed({"true"})
     @Path("movie")
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerMovie(Movie movie) throws Exception {
@@ -54,6 +59,7 @@ public class Register {
     }
 
     @POST
+    @RolesAllowed({"true"})
     @Path("screening")
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerScreening(Screening screening) throws Exception {
@@ -61,6 +67,7 @@ public class Register {
     }
     
     @POST
+    @RolesAllowed({"false"})
     @Path("ticket")
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerTicket(Ticket ticket) throws Exception {
@@ -68,6 +75,7 @@ public class Register {
     }
     
     @POST
+    @RolesAllowed({"false"})
     @Path("seatReserved")
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerSeatReserved(SeatReserved seatR) throws Exception {

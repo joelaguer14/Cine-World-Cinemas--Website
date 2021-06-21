@@ -9,7 +9,6 @@ var user;
 var screening;
 var screeningList = new Array();
 
-
 function fetchAndList() {
     let userJSON = sessionStorage.getItem("user");
     let user = JSON.parse(userJSON);
@@ -34,29 +33,28 @@ function rowContentDisplay() {
         });
         seats = new Array();
         seats = t.seatsReservedList;
-        screening =  screenings[0];
-        seatsNumbers = printSeats(t.seatsReservedList,screening.auditorium.seatsList);
+        screening = screenings[0];
+        seatsNumbers = printSeats(t.seatsReservedList, screening.auditorium.seatsList);
         ticketTxt += "<li class='list-group-item'>" +
                 "<div class='media align-items-lg-center flex-column flex-lg-row p-1'>" +
                 "<div class='media-body order-2 order-lg-1 align-items-lg-center'>" +
                 "<h5 class='mt-0 mb-1 font-weight-bold mb-2'> Ticket id: " + t.id + "</h5>" +
                 "<p class='font-italic text-muted mb-0 small'>Function date: " + screening.screeningStart + "</p>" +
-                "<p class='font-italic text-muted mb-0 small'>Seats: " +seatsNumbers + "</p>" +
+                "<p class='font-italic text-muted mb-0 small'>Seats: " + seatsNumbers + "</p>" +
                 "<p class='font-italic text-muted mb-0 small'>Price: " + t.totalPrice + "$</p>" +
                 "</div>" +
                 "</li>";
     }
     rowContent.append(ticketTxt);
-
-
 }
-function printSeats(ticketSeatsList,auditoriumSeats){
-    var seatsTxt = ""; 
-    for (const t of ticketSeatsList){
-        for (const s of auditoriumSeats){
-            for (const a of s.seatsReserved){
-                if(a.id === t.id){                    
-                    seatsTxt += " Number: "+s.number+" Row: "+s.row;
+
+function printSeats(ticketSeatsList, auditoriumSeats) {
+    var seatsTxt = "";
+    for (const t of ticketSeatsList) {
+        for (const s of auditoriumSeats) {
+            for (const a of s.seatsReserved) {
+                if (a.id === t.id) {
+                    seatsTxt += " Number: " + s.number + " Row: " + s.row;
                     seatsTxt += " ";
                 }
             }
@@ -78,6 +76,7 @@ function fetchScreenings() {
         rowContentDisplay();
     })();
 }
+
 function load() {
     fetchAndList();
     fetchScreenings();
