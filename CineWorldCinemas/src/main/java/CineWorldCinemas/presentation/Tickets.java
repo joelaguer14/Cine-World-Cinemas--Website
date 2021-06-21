@@ -43,10 +43,14 @@ public class Tickets {
     }
 
     @PUT
+    @Path("creditCard")
     @Consumes(MediaType.APPLICATION_JSON)
     public void update(Ticket ticket) {  
         try {
-            Service.instance().updateTicket(ticket);
+            Ticket saveTicket = Service.instance().findTicketById(ticket.getId());
+            saveTicket.setCreditCard(ticket.getCreditCard());
+            Service.instance().updateTicket(saveTicket);
+            
         } catch (Exception ex) {
             throw new NotFoundException(); 
         }

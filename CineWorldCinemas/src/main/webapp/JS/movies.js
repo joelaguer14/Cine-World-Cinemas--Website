@@ -7,7 +7,6 @@ var ticket = {};
 var totalPrice = 0;
 var selectedSeats = new Array();
 var DBTicket;
-var contAnonymous = 5;
 
 function carouselContentDisplay(carouselContent, movie) {
     var indicator = $("#indicators");
@@ -353,39 +352,15 @@ function loadTicket() {
 function makePurchase() {
     DBTicket.creditCard = $("#payment-card").val();
 
-
-
-    let requestGetUser = new Request(url + 'api/users/last', {method: 'GET', headers: {}});
     (async () => {
         console.log(DBTicket);
-        if (DBTicket.user == null) {
-            console.log("User null")
-            let user = {id: "" + ++contAnonymous, name: $("#register-fullname-payment").val(), email: $("#register-email-payment").val()};
-            console.log(user);
-            let requestUser = new Request(url + 'api/register', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(user)});
-
-            const responseUser = await fetch(requestUser);
-            if (!responseUser.ok) {
-                errorMessage(responseUser.status, $("#register-modal #error"));
-                return;
-            }
-
-            const responseGetUserDB = await fetch(requestGetUser);
-            if (!responseGetUserDB.ok) {
-                errorMessage(responseGetUserDB.status, $("#payment-modal-body #error"));
-                return;
-            }
-            user = await responseGetUserDB.json();
-            DBTicket.user = user;
-            console.log(user);
-            //DBTicket.user 
-        }
-        let request = new Request(url + 'api/tickets', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(DBTicket)});
+        let request = new Request(url + 'api/tickets/creditCard', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(DBTicket)});
         const response = await fetch(request);
         if (!response.ok) {
             errorMessage(response.status, $("#payment-modal #error"));
             return;
         }
+        DBTicket.screening = ticket.screening;
         createPdf(DBTicket.id, DBTicket);
         resetPayment();
 
@@ -393,6 +368,8 @@ function makePurchase() {
 }
 function resetPayment() {
     $("#payment-card").val("");
+    $("#register-fullname-payment").val("");
+    $("#register-fullname-payment").val("");
     DBTicket = {user: {}, creditCard: "", screening: {screeningStart: ""}, totalPrice: 0.0};
 }
 
@@ -414,13 +391,17 @@ function resetTicket() {
     selectedSeats = [];
 }
 function createPdf(id, ticket) {
+    console.log(ticket);
     var doc = new jsPDF();
     doc.text(20, 20, 'Ticket id: ' + id);
     doc.text(20, 30, 'Auditorium: ' + ticket.screening.auditorium.name);
     doc.text(20, 40, 'Screening date: ' + ticket.screening.screeningStart);
     doc.text(20, 50, 'Price: $' + ticket.totalPrice);
     doc.text(20, 50, 'Credit card number: ' + ticket.creditCard);
-    doc.text(20, 50, 'User name: ' + ticket.user.name);
+    if (!(sessionStorage.getItem("user"))) {
+        doc.text(20, 50, 'Full Name: ' + $("#register-fullname-payment").val());
+        doc.text(20, 50, 'E-Mail: ' + $("#register-fullname-payment").val());
+    }
     doc.save('Ticket' + id + '.pdf');
 }
 //function validateTicket(){
