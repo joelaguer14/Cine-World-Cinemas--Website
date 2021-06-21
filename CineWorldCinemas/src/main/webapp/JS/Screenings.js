@@ -29,7 +29,7 @@ function validate() {
 function load() {
     let screeningAux = Object.fromEntries((new FormData($("#register-screening-form").get(0))).entries());
     screening = {movie: {id: screeningAux.movieId}, auditorium: {id: screeningAux.auditoriumId}, screeningStart: screeningAux.screeningStart};
-    
+
 }
 
 function add() {
@@ -88,6 +88,32 @@ function fetchAndListAuditoriums() {
         });
         $("#register-screening-auditorium").append(audOptions);
     })();
+}
+
+function errorMessage(status, place) {
+    switch (status) {
+        case 404:
+            error = "User not found";
+            break;
+        case 403:
+        case 405:
+            error = "Unauthorized user";
+            break;
+        case 406:
+        case 405:
+            error = "User already exists";
+            break;
+        default:
+            error = "Error: " + status;
+            break;
+    }
+    ;
+
+    place.html("<div class='alert alert-danger alert-dismissible fade show' role='alert'>" +
+            "<strong>Error!</strong> " + error + " " +
+            "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>" +
+            "</div>");
+    return;
 }
 
 function loaded() {
