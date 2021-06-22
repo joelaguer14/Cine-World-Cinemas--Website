@@ -12,34 +12,34 @@ var screeningList = new Array();
 
 function fetchAndListTickets(id) {
     let request = new Request(url + 'api/tickets/' + id, {method: 'GET', headers: {}});
+    let requestScreening = new Request(url + 'api/screenings', {method: 'GET', headers: {}});
     (async () => {
+        //ticket by id
         const response = await fetch(request);
         if (!response.ok) {
             errorMessage(response.status);
             return;
         }
         ticket = await response.json();
-        console.log(ticket);
+        //Screenings
+        const responseScreening = await fetch(requestScreening);
+        if (!responseScreening.ok) {
+            errorMessage(responseScreening.status);
+            return;
+        }
+        screenings = await responseScreening.json();
+        screenings.forEach((s) => {
+            if (s.id === ticket.seatsReservedList[0].screeningId) {
+                screening = s;
+            }
+        });
+        ticket.screening = screening;
         createPdf(ticket.id, ticket);
     })();
 }
 
-
-function fetchScreenings() {
-    let request = new Request(url + 'api/screenings', {method: 'GET', headers: {}});
-    (async () => {
-        const response = await fetch(request);
-        if (!response.ok) {
-            errorMessage(response.status);
-            return;
-        }
-        screeningList = await response.json();
-        rowContentDisplay();
-    })();
-}
-
 function createPdf(id, ticket) {
-    
+
     var doc = new jsPDF();
     doc.text(20, 20, 'Ticket id: ' + id);
     doc.text(20, 30, 'Auditorium: ' + ticket.screening.auditorium.name);
@@ -50,13 +50,13 @@ function createPdf(id, ticket) {
         doc.text(20, 80, 'Full Name: ' + $("#register-fullname-payment").val());
         doc.text(20, 90, 'E-Mail: ' + $("#register-email-payment").val());
     }
-    
+
     doc.save('Ticket' + id + '.pdf');
 }
 
 function load() {
     console.log($("#search-tickets-button"));
-    $("#search-tickets-button").click(function() {
+    $("#search-tickets-button").click(function () {
         console.log($("#search-tickets-input").val());
         fetchAndListTickets($("#search-tickets-input").val());
     });
