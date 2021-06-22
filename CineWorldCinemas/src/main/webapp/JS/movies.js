@@ -272,13 +272,8 @@ function calculateTotal(price) {
 }
 
 function addTicket() {
-//    console.log("addTicket");
     loadTicket();
-//    console.log(ticket);
-//    if (!validateTicket()) {
-//        console.log("validate");
-//        return;
-//    }
+
     let request = new Request(url + 'api/register/ticket', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(ticket)});
     let requestGetTicket = new Request(url + 'api/tickets/last', {method: 'GET', headers: {}});
 
@@ -337,8 +332,6 @@ function addTicket() {
         $('#payment-modal').prepend("<div class='fs-5'>" +
                 "Total amount: " + DBTicket.totalPrice + "</div>");
         $('#payment-modal').modal('show');
-        console.log(ticket);
-//        createPdf(DBTicket.id, ticket);
     })();
 }
 function loadTicket() {
@@ -354,7 +347,6 @@ function makePurchase() {
     DBTicket.creditCard = $("#payment-card").val();
 
     (async () => {
-        console.log(DBTicket);
         let request = new Request(url + 'api/tickets/creditCard', {method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(DBTicket)});
         const response = await fetch(request);
         if (!response.ok) {
@@ -387,12 +379,12 @@ function createReservedSeats() {
 }
 
 function resetTicket() {
-    //resetea los valores del ticket
     totalPrice = 0;
     selectedSeats = [];
 }
+
 function createPdf(id, ticket) {
-    console.log(ticket);
+    
     var doc = new jsPDF();
     doc.text(20, 20, 'Ticket id: ' + id);
     doc.text(20, 30, 'Auditorium: ' + ticket.screening.auditorium.name);
@@ -400,16 +392,12 @@ function createPdf(id, ticket) {
     doc.text(20, 50, 'Price: $' + ticket.totalPrice);
     doc.text(20, 60, 'Credit card number: ' + ticket.creditCard);
     if (!(sessionStorage.getItem("user"))) {
-        doc.text(20, 70, 'Full Name: ' + $("#register-fullname-payment").val());
-        doc.text(20, 80, 'E-Mail: ' + $("#register-email-payment").val());
+        doc.text(20, 80, 'Full Name: ' + $("#register-fullname-payment").val());
+        doc.text(20, 90, 'E-Mail: ' + $("#register-email-payment").val());
     }
+    
     doc.save('Ticket' + id + '.pdf');
 }
-
-//function validateTicket(){
-//    //valida si hay asientos seleccionados
-//}
-
 
 function errorMessage(status, place) {
     switch (status) {

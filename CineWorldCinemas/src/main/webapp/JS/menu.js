@@ -30,6 +30,7 @@ if (userJSON !== null) {
     if (user.isAdmin === false) {
         menu += "<li class='nav-item'> <a class='nav-link' href='/CineWorldCinemas/presentation/History.html'>History</a> </li>";
     } else {
+        menu += "<li class='nav-item'> <a class='nav-link' href='/CineWorldCinemas/presentation/admin/Tickets.html'>Print Tickets</a> </li>";
         menu += "<li class='nav-item dropdown'>" +
                 "<a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' role='button' data-bs-toggle='dropdown' aria-expanded='false'>" +
                 "Add new..." +

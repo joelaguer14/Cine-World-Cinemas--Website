@@ -27,7 +27,6 @@ import javax.ws.rs.core.MediaType;
 public class Screenings {
     
     @GET
-    
     @Produces({MediaType.APPLICATION_JSON})
     public List<Screening> search(@DefaultValue("") @QueryParam("nombre") String nombre) {
         return Service.instance().findAllScreenings();

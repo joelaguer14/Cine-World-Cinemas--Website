@@ -153,7 +153,6 @@ body {
 }
 
 /*Forms*/
-
 input.invalid {box-shadow: 0 0 1px 1px red;}
 
 .form-input{
@@ -184,10 +183,6 @@ input.invalid {box-shadow: 0 0 1px 1px red;}
     padding-left: 0px;
     font-family: 'Open Sans', sans-serif;
 }
-/*
-.form-input input:focus, .form-input input:valid{
-    border: 2px solid #212529;
-}*/
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
     background-color: #007bff !important;
@@ -304,7 +299,7 @@ input.invalid {box-shadow: 0 0 1px 1px red;}
 }
 
 .row-seat .col-md-3{
-   display:inline-block;
-   vertical-align: middle;
-   float: none;
+    display:inline-block;
+    vertical-align: middle;
+    float: none;
 }

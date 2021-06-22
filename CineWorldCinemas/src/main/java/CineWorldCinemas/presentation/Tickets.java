@@ -5,14 +5,11 @@
  */
 package CineWorldCinemas.presentation;
 
-import CineWorldCinemas.logic.Movie;
 import CineWorldCinemas.logic.Service;
 import CineWorldCinemas.logic.Ticket;
-import CineWorldCinemas.logic.User;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
@@ -47,7 +44,7 @@ public class Tickets {
             throw new NotFoundException(ex);
         }
     }
-    
+
     @GET
     @PermitAll
     @Path("last")
@@ -63,15 +60,14 @@ public class Tickets {
     @Path("creditCard")
     @PermitAll
     @Consumes(MediaType.APPLICATION_JSON)
-    public void update(Ticket ticket) {  
+    public void update(Ticket ticket) {
         try {
             Ticket saveTicket = Service.instance().findTicketById(ticket.getId());
             saveTicket.setCreditCard(ticket.getCreditCard());
             Service.instance().updateTicket(saveTicket);
-            
+
         } catch (Exception ex) {
-            throw new NotFoundException(); 
+            throw new NotFoundException();
         }
     }
-
 }

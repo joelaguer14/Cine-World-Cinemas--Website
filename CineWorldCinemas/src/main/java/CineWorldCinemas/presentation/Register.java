@@ -32,7 +32,6 @@ public class Register {
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerUser(User user) throws Exception {
         Service.instance().saveUser(user);
-
     }
 
     @POST
@@ -65,7 +64,7 @@ public class Register {
     public void registerScreening(Screening screening) throws Exception {
         Service.instance().saveScreening(screening);
     }
-    
+
     @POST
     @PermitAll
     @Path("ticket")
@@ -73,7 +72,7 @@ public class Register {
     public void registerTicket(Ticket ticket) throws Exception {
         Service.instance().saveTicket(ticket);
     }
-    
+
     @POST
     @PermitAll
     @Path("seatReserved")
