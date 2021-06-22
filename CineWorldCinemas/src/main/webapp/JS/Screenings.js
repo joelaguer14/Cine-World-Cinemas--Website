@@ -32,7 +32,7 @@ function load() {
 
 }
 
-function add() {
+function addScreening() {
     load();
     if (!validate()) {
         return;
@@ -117,7 +117,7 @@ function errorMessage(status, place) {
 }
 
 function loaded() {
-    $("#register-screening-button").click(add);
+    $("#register-screening-button").click(addScreening);
     fetchAndListAuditoriums();
     fetchAndListMovies();
 }

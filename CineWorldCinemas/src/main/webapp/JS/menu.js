@@ -58,8 +58,8 @@ if (userJSON !== null) {
 menu +=
         "</ul>" +
         "<form class='d-flex'>" +
-        "<input class='form-control me-2' type='search' placeholder='Search movies' aria-label='Search'>" +
-        "<button class='btn btn-outline-light' type='submit'>Search</button>" +
+        "<input id='search-input' class='form-control me-2' type='search' placeholder='Search movies' aria-label='Search'>" +
+        "<button id='search-button' class='btn btn-outline-light' type='button'>Search</button>" +
         "</form>" +
         "</div>" +
         "</div>" +

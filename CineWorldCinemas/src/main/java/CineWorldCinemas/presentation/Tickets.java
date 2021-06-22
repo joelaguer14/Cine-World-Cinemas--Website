@@ -5,6 +5,7 @@
  */
 package CineWorldCinemas.presentation;
 
+import CineWorldCinemas.logic.Movie;
 import CineWorldCinemas.logic.Service;
 import CineWorldCinemas.logic.Ticket;
 import CineWorldCinemas.logic.User;
@@ -37,6 +38,18 @@ public class Tickets {
 
     @GET
     @PermitAll
+    @Path("{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Ticket get(@PathParam("id") int id) {
+        try {
+            return Service.instance().findTicketById(id);
+        } catch (Exception ex) {
+            throw new NotFoundException(ex);
+        }
+    }
+    
+    @GET
+    @PermitAll
     @Path("last")
     @Produces({MediaType.APPLICATION_JSON})
     public Ticket searchLast() {
@@ -48,7 +61,7 @@ public class Tickets {
 
     @PUT
     @Path("creditCard")
-    @RolesAllowed({"true"})
+    @PermitAll
     @Consumes(MediaType.APPLICATION_JSON)
     public void update(Ticket ticket) {  
         try {

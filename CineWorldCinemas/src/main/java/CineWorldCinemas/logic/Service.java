@@ -82,8 +82,8 @@ public class Service {
 
     public List<Movie> findMoviesByName(String name) {
         List<Movie> movies = new ArrayList<>();
-        this.findAllMovies().stream().filter(movie -> (movie.getTitle().
-                contains(name))).forEachOrdered(movie -> {
+        this.findAllMovies().stream().filter(movie -> (movie.getTitle().toUpperCase().
+                contains(name.toUpperCase()))).forEachOrdered(movie -> {
             movies.add(movie);
         });
         return movies;

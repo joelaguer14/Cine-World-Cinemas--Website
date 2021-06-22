@@ -53,6 +53,7 @@ function listMovies() {
     var carouselContent = $("#carousel-content");
     var rowContent = $("#row-content");
     carouselContent.html("");
+    rowContent.html("");
     movies.forEach((movie) => {
         carouselContentDisplay(carouselContent, movie);
         rowContentDisplay(rowContent, movie);
@@ -64,8 +65,8 @@ function listMovies() {
     });
 }
 
-function fetchAndList() {
-    let request = new Request(url + 'api/movies', {method: 'GET', headers: {}});
+function fetchAndList(queryParam = '') {
+    let request = new Request(url + 'api/movies?nombre=' + queryParam, {method: 'GET', headers: {}});
     (async () => {
         const response = await fetch(request);
         if (!response.ok) {
@@ -114,7 +115,7 @@ function addImage() {
     })();
 }
 
-function add() {
+function addMovie() {
     load();
     if (!validate()) {
         return;
@@ -128,11 +129,11 @@ function add() {
         }
         addImage();
         reset();
-        render();
+        reset();
     })();
 }
 
-function render() {
+function reset() {
     $("#register-movie-price").val("");
     $("#register-movie-duration").val("");
     $("#register-movie-title").val("");
@@ -369,7 +370,7 @@ function makePurchase() {
 function resetPayment() {
     $("#payment-card").val("");
     $("#register-fullname-payment").val("");
-    $("#register-fullname-payment").val("");
+    $("#register-email-payment").val("");
     DBTicket = {user: {}, creditCard: "", screening: {screeningStart: ""}, totalPrice: 0.0};
 }
 
@@ -397,10 +398,10 @@ function createPdf(id, ticket) {
     doc.text(20, 30, 'Auditorium: ' + ticket.screening.auditorium.name);
     doc.text(20, 40, 'Screening date: ' + ticket.screening.screeningStart);
     doc.text(20, 50, 'Price: $' + ticket.totalPrice);
-    doc.text(20, 50, 'Credit card number: ' + ticket.creditCard);
+    doc.text(20, 60, 'Credit card number: ' + ticket.creditCard);
     if (!(sessionStorage.getItem("user"))) {
-        doc.text(20, 50, 'Full Name: ' + $("#register-fullname-payment").val());
-        doc.text(20, 50, 'E-Mail: ' + $("#register-fullname-payment").val());
+        doc.text(20, 70, 'Full Name: ' + $("#register-fullname-payment").val());
+        doc.text(20, 80, 'E-Mail: ' + $("#register-email-payment").val());
     }
     doc.save('Ticket' + id + '.pdf');
 }
@@ -438,9 +439,12 @@ function errorMessage(status, place) {
 
 function loaded() {
     fetchAndList();
-    $("#register-movie-button").click(add);
+    $("#register-movie-button").click(addMovie);
     $("#purchase-ticket-button").click(addTicket);
     $("#purchase-payment-button").click(makePurchase);
+    $("#search-button").click(function () {
+        fetchAndList($("#search-input").val());
+    });
 }
 
 $(loaded);

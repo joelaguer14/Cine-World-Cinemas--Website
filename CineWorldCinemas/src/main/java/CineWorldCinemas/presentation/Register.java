@@ -67,7 +67,7 @@ public class Register {
     }
     
     @POST
-    @RolesAllowed({"false"})
+    @PermitAll
     @Path("ticket")
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerTicket(Ticket ticket) throws Exception {
@@ -75,7 +75,7 @@ public class Register {
     }
     
     @POST
-    @RolesAllowed({"false"})
+    @PermitAll
     @Path("seatReserved")
     @Consumes(MediaType.APPLICATION_JSON)
     public void registerSeatReserved(SeatReserved seatR) throws Exception {

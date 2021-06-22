@@ -29,7 +29,7 @@ function load() {
 
 }
 
-function add() {
+function addAuditorium() {
     load();
     console.log(auditorium);
     if (!validate()) {
@@ -79,7 +79,7 @@ function errorMessage(status, place) {
 }
 
 function loaded() {
-    $("#register-auditorium-button").click(add);
+    $("#register-auditorium-button").click(addAuditorium);
 }
 
 $(loaded);  

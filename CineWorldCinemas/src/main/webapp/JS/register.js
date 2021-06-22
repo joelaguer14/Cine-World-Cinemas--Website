@@ -1,3 +1,4 @@
+
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,7 +42,7 @@ function load() {
     user.isAdmin = false;
 }
 
-function add() {
+function addUser() {
     load();
     if (!validate()) {
         console.log("validate");
@@ -95,7 +96,7 @@ function loaded() {
         }
         content = await response.text();
         $('body').append(content);
-        $("#register-button").click(add);
+        $("#register-button").click(addUser);
     })();
 }
 
